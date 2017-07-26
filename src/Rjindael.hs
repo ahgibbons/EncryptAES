@@ -85,32 +85,6 @@ decryptAES aestype key text = stateMatrixToOutput . mxor rf . invSubBytes
     rf = roundKeys !! nr
     initState = mxor (inputToStateMatrix text) r0
 
-invcipher128 key a = stateMatrixToOutput . mxor rf . invSubBytes
-                   . invShiftRows . foldl invCipherRound initState $ rs
-  where
-    roundKeys = reverse . expandKey nk_128 nb nr_128 $ (BS.unpack key)
-    r0 = head roundKeys
-    rs = take (nr_128-1) . tail $ roundKeys
-    rf = roundKeys !! nr_128
-    initState = mxor (inputToStateMatrix a) r0
-
-invcipher192 key a = stateMatrixToOutput . mxor rf . invSubBytes
-                   . invShiftRows . foldl invCipherRound initState $ rs
-  where
-    roundKeys = reverse . expandKey nk_192 nb nr_192 $ (BS.unpack key)
-    r0 = head roundKeys
-    rs = take (nr_192-1) . tail $ roundKeys
-    rf = roundKeys !! nr_192
-    initState = mxor (inputToStateMatrix a) r0
-
-invcipher256 key a = stateMatrixToOutput . mxor rf . invSubBytes
-                   . invShiftRows . foldl invCipherRound initState $ rs
-  where
-    roundKeys = reverse . expandKey nk_256 nb nr_256 $ (BS.unpack key)
-    r0 = head roundKeys
-    rs = take (nr_256-1) . tail $ roundKeys
-    rf = roundKeys !! nr_256
-    initState = mxor (inputToStateMatrix a) r0
 
 cipherRound instate roundkey = mxor roundkey . mixColumns
                            . shiftRows . subBytes $ instate

@@ -7,6 +7,7 @@ import Data.Bits (xor)
 import Data.Word
 import qualified Data.Matrix as Mat
 import qualified Data.Vector.Unboxed as V
+import Numeric (showHex,showIntAtBase)
 
 rconTable :: [Word8]
 rconTable = [ 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40
@@ -122,3 +123,6 @@ subWord = map subByte
 
 rotWord :: [Word8] -> [Word8]
 rotWord [a0,a1,a2,a3] = [a1,a2,a3,a0]
+
+hexMatrix :: Mat.Matrix Word8 -> Mat.Matrix String
+hexMatrix = fmap (\a -> showHex a "")

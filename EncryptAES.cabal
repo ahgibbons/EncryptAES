@@ -21,6 +21,7 @@ library
                      , GF2_8
                      , Utils
                      , KeyExpansion
+                     , Tests
   build-depends:       base >= 4.7 && < 5
                      , bytestring
                      , word8

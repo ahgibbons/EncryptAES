@@ -1,16 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Utils where
 
-import qualified Data.ByteString as BS
 import qualified Data.Bits as B
 import GaloisFields
-import Data.Bits ((.&.),(.|.),xor)
-import Numeric (showHex,showIntAtBase)
-import Data.Char (intToDigit)
+import Data.Bits (xor)
 import Data.Word
-import Data.Bits.ByteString
-import Data.List.Split (chunksOf)
 import qualified Data.Matrix as Mat
+import qualified Data.Vector.Unboxed as V
 
 rconTable :: [Word8]
 rconTable = [ 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40
@@ -57,8 +53,10 @@ addRoundKey a b = mxor a b
 
 
 subBytes :: Mat.Matrix Word8 -> Mat.Matrix Word8
-subBytes a = fmap subByte a
+subBytes a = fmap ((V.!) subByteVector . fromIntegral) a
 
+subByteVector :: V.Vector Word8
+subByteVector = V.generate 256 (subByte . fromIntegral)
 
 subByte :: Word8 -> Word8
 subByte b' = b `xor` b4 `xor` b5 `xor` b6 `xor` b7 `xor` c

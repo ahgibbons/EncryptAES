@@ -54,16 +54,6 @@ stateMatrixToOutput mat = BS.pack . Mat.toList
 hexMatrix :: Mat.Matrix Word8 -> Mat.Matrix String
 hexMatrix = fmap (\a -> showHex a "")
 
-
-invcipher128 key a = stateMatrixToOutput . mxor rf . invSubBytes
-                   . invShiftRows . foldl invCipherRound initState $ rs
-  where
-    roundKeys = reverse . expandKey nk_128 nb nr_128 $ (BS.unpack key)
-    r0 = head roundKeys
-    rs = take (nr_128-1) . tail $ roundKeys
-    rf = roundKeys !! nr_128
-    initState = mxor (inputToStateMatrix a) r0
-
               
 cipher128 :: BS.ByteString -> BS.ByteString -> BS.ByteString
 cipher128 key a = stateMatrixToOutput . mxor rf 
@@ -97,6 +87,33 @@ cipher256 key a = stateMatrixToOutput . mxor rf
     r0 = head roundKeys
     rs = take (nr_256-1) . tail $ roundKeys
     rf = roundKeys !! nr_256
+
+invcipher128 key a = stateMatrixToOutput . mxor rf . invSubBytes
+                   . invShiftRows . foldl invCipherRound initState $ rs
+  where
+    roundKeys = reverse . expandKey nk_128 nb nr_128 $ (BS.unpack key)
+    r0 = head roundKeys
+    rs = take (nr_128-1) . tail $ roundKeys
+    rf = roundKeys !! nr_128
+    initState = mxor (inputToStateMatrix a) r0
+
+invcipher192 key a = stateMatrixToOutput . mxor rf . invSubBytes
+                   . invShiftRows . foldl invCipherRound initState $ rs
+  where
+    roundKeys = reverse . expandKey nk_192 nb nr_192 $ (BS.unpack key)
+    r0 = head roundKeys
+    rs = take (nr_192-1) . tail $ roundKeys
+    rf = roundKeys !! nr_192
+    initState = mxor (inputToStateMatrix a) r0
+
+invcipher256 key a = stateMatrixToOutput . mxor rf . invSubBytes
+                   . invShiftRows . foldl invCipherRound initState $ rs
+  where
+    roundKeys = reverse . expandKey nk_256 nb nr_256 $ (BS.unpack key)
+    r0 = head roundKeys
+    rs = take (nr_256-1) . tail $ roundKeys
+    rf = roundKeys !! nr_256
+    initState = mxor (inputToStateMatrix a) r0
 
 cipherRound instate roundkey = mxor roundkey . mixColumns
                            . shiftRows . subBytes $ instate

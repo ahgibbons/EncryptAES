@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Utils where
 
+import qualified Data.ByteString as BS
 import qualified Data.Bits as B
 import GaloisFields
 import Data.Bits (xor)
@@ -8,6 +9,10 @@ import Data.Word
 import qualified Data.Matrix as Mat
 import qualified Data.Vector.Unboxed as V
 import Numeric (showHex,showIntAtBase)
+import Data.Int (Int64)
+import Data.List (unfoldr)
+
+blocksize = 16 :: Int
 
 rconTable :: [Word8]
 rconTable = [ 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40
@@ -126,3 +131,26 @@ rotWord [a0,a1,a2,a3] = [a1,a2,a3,a0]
 
 hexMatrix :: Mat.Matrix Word8 -> Mat.Matrix String
 hexMatrix = fmap (\a -> showHex a "")
+
+pkcs7 :: Int -> BS.ByteString -> BS.ByteString
+pkcs7 blocksize bs = BS.append bs . BS.replicate n . fromIntegral $ n
+  where
+    n = fromIntegral blocksize - (BS.length bs `mod` fromIntegral blocksize)
+
+unpkcs7 :: BS.ByteString -> Maybe BS.ByteString
+unpkcs7 bs = if (BS.all (==last') pad)
+             then Just text
+             else Nothing
+  where
+    len        = BS.length bs
+    last'      = BS.last bs
+    (text,pad) = BS.splitAt (len - (fromIntegral last')) bs
+
+justWhen :: (a -> Bool) -> (a -> b) -> (a -> Maybe b)
+justWhen f g a = if f a then Just (g a) else Nothing
+
+nothingWhen :: (a -> Bool) -> (a -> b) -> (a -> Maybe b)
+nothingWhen f = justWhen (not . f)
+
+chunksOfBS :: Int -> BS.ByteString -> [BS.ByteString]
+chunksOfBS x = unfoldr (nothingWhen BS.null (BS.splitAt x))

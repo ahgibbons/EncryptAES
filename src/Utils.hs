@@ -11,6 +11,7 @@ import qualified Data.Vector.Unboxed as V
 import Numeric (showHex,showIntAtBase)
 import Data.Int (Int64)
 import Data.List (unfoldr)
+import qualified System.Random as R
 
 import Types
 
@@ -154,3 +155,6 @@ nothingWhen f = justWhen (not . f)
 
 chunksOfBS :: Int -> BS.ByteString -> [BS.ByteString]
 chunksOfBS x = unfoldr (nothingWhen BS.null (BS.splitAt x))
+
+randomIV :: R.RandomGen g => g -> IV
+randomIV = BS.pack . take 16 . R.randoms 

@@ -37,6 +37,7 @@ library
                      , matrix
                      , hexstring
                      , vector
+                     , random
   default-language:    Haskell2010
 
 executable EncryptAES-exe

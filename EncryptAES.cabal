@@ -23,6 +23,7 @@ library
                      , KeyExpansion
                      , Tests
                      , Block
+                     , Types
   build-depends:       base >= 4.7 && < 5
                      , bytestring
                      , word8

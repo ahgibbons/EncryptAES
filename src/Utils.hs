@@ -12,6 +12,8 @@ import Numeric (showHex,showIntAtBase)
 import Data.Int (Int64)
 import Data.List (unfoldr)
 
+import Types
+
 blocksize = 16 :: Int
 
 rconTable :: [Word8]
@@ -84,8 +86,6 @@ invSubByte a = gf2Inv $ a2 `xor` a5 `xor` a7 `xor` c
     a5 = B.rotateR a 5
     a7 = B.rotateR a 7
     c = 0x05
-
-
 
 
 rotateList :: Int -> [a] -> [a]

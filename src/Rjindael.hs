@@ -15,11 +15,8 @@ import qualified Data.Matrix as Mat
 
 import Utils
 import KeyExpansion (expandKey)
+import Types
 
-data AES = AES128 | AES192 | AES256 deriving (Show,Eq)
-type PlainText = BS.ByteString
-type Key = BS.ByteString
-type CipherText = BS.ByteString
 
 nb = 4 :: Int
 nk_128 = 4 :: Int

@@ -4,6 +4,7 @@ import Rjindael
 import Tests
 import qualified Data.ByteString.Char8 as BSC
 import Data.HexString
+import Types
 
 main :: IO ()
 main = do

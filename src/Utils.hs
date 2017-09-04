@@ -1,9 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Utils where
+module Utils ( subWord, rotWord, rcon
+             , mxor,subBytes, shiftRows
+             , invSubBytes, invShiftRows
+             , mixColumns, invMixColumns
+             , chunksOfBS, blocksize
+             , pkcs7, unpkcs7) where
 
 import qualified Data.ByteString as BS
 import qualified Data.Bits as B
-import GaloisFields
 import Data.Bits (xor)
 import Data.Word
 import qualified Data.Matrix as Mat
@@ -14,6 +18,7 @@ import Data.List (unfoldr)
 import qualified System.Random as R
 
 import Types
+import GaloisFields
 
 blocksize = 16 :: Int
 

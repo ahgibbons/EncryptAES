@@ -1,9 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Rjindael where
+module Rjindael (encryptAES, decryptAES) where
 
 import qualified Data.ByteString as BS
 import qualified Data.Bits as B
-import GaloisFields
 import Data.Bits ((.&.),(.|.),xor)
 
 import Data.Char (intToDigit)
@@ -13,9 +12,11 @@ import Data.List.Split (chunksOf)
 import qualified Data.Matrix as Mat
 
 
-import Utils
+import Utils (mxor, subBytes, shiftRows, invSubBytes, invShiftRows,
+             mixColumns, invMixColumns)
 import KeyExpansion (expandKey)
 import Types
+import GaloisFields
 
 
 nb = 4 :: Int
@@ -26,10 +27,6 @@ nr_128 = 10 :: Int
 nr_192 = 12 :: Int
 nr_256 = 14 :: Int
 
-aes_mod = aes_GF2_mod
-
-          
-gf2_8_a = [3,1,1,2]
 
 multParts :: Int -> Int -> Int -> [Int]
 multParts n a b 
@@ -39,11 +36,6 @@ multParts n a b
 rotateByteStringL :: Int -> BS.ByteString -> BS.ByteString
 rotateByteStringL i bs = BS.append (BS.drop i bs) (BS.take i bs)
 
-rconMod :: BS.ByteString
-rconMod = BS.pack $ [1,27]
-
-rconModInt :: Int
-rconModInt = 0x11b
 
 inputToStateMatrix :: BS.ByteString -> Mat.Matrix Word8
 inputToStateMatrix bs = Mat.transpose . Mat.fromList 4 4 $ BS.unpack bs

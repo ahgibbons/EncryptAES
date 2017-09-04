@@ -1,12 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Block where
 
-import Rjindael
-import Utils
+
 import Data.List.Split (chunksOf)
 import Data.Bits (xor)
 import qualified Data.ByteString as BS
 
+import Rjindael
+import Utils ( chunksOfBS, blocksize, pkcs7
+             , unpkcs7)
 import Types
 
 ecbEncrypt :: AES -> Key -> PlainText -> CipherText

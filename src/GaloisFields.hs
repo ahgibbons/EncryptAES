@@ -101,9 +101,3 @@ pmod a m
   where
     leadingM = countLeadingZeros m
     leadingA = countLeadingZeros a
-
-log2Int :: Int -> Int
-log2Int d  = log2Int' d 0
-  where
-    log2Int' 0 t = t
-    log2Int' d t = log2Int' (d `div` 2) (t+1)

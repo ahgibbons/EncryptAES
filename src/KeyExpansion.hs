@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module KeyExpansion where
+module KeyExpansion (expandKey) where
 
 import qualified Data.ByteString as BS
 import qualified Data.Bits as B
@@ -8,15 +8,8 @@ import Data.Bits (xor)
 import qualified Data.Matrix as Mat
 import Data.List.Split (chunksOf)
 
-import Utils
+import Utils (subWord, rotWord, rcon)
 
-nb_c = 4 :: Int
-nk_128 = 4 :: Int
-nk_192 = 6 :: Int
-nk_256 = 8 :: Int
-nr_128 = 10 :: Int
-nr_192 = 12 :: Int
-nr_256 = 14 :: Int
 
 expandKey :: Int -> Int -> Int -> [Word8] -> [Mat.Matrix Word8]
 expandKey nK nB nR key = map (Mat.transpose . Mat.fromLists) $ chunksOf 4 expanded

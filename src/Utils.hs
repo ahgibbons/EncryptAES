@@ -64,9 +64,11 @@ mxor = Mat.elementwise xor
 addRoundKey :: Mat.Matrix Word8 -> Mat.Matrix Word8 -> Mat.Matrix Word8
 addRoundKey a b = mxor a b
 
--- subBytes from a vector
 subBytes :: Mat.Matrix Word8 -> Mat.Matrix Word8
-subBytes a = fmap (BS.index subByteFile . fromIntegral) a
+subBytes = fmap subByte 
+
+subByte :: Word8 -> Word8
+subByte = BS.index subByteFile . fromIntegral
 
 subByteFile :: BS.ByteString
 subByteFile = $(embedFile "subBytes.hb")
@@ -75,6 +77,7 @@ invSubByteFile :: BS.ByteString
 invSubByteFile = $(embedFile "invSubBytes.hb")
 
 
+{-}
 subByte :: Word8 -> Word8
 subByte b' = b `xor` b4 `xor` b5 `xor` b6 `xor` b7 `xor` c
   where
@@ -84,11 +87,16 @@ subByte b' = b `xor` b4 `xor` b5 `xor` b6 `xor` b7 `xor` c
     b6 = B.rotateR b 6
     b7 = B.rotateR b 7
     c  = 0x63
+-}
+
+invSubByte :: Word8 -> Word8
+invSubByte = BS.index invSubByteFile . fromIntegral
 
 
 invSubBytes :: Mat.Matrix Word8 -> Mat.Matrix Word8
-invSubBytes a = fmap (BS.index invSubByteFile . fromIntegral) a
+invSubBytes = fmap invSubByte
 
+{-}
 invSubByte :: Word8 -> Word8
 invSubByte a = gf2Inv $ a2 `xor` a5 `xor` a7 `xor` c 
   where
@@ -96,7 +104,7 @@ invSubByte a = gf2Inv $ a2 `xor` a5 `xor` a7 `xor` c
     a5 = B.rotateR a 5
     a7 = B.rotateR a 7
     c = 0x05
-
+-}
 
 rotateList :: Int -> [a] -> [a]
 rotateList _ [] = []

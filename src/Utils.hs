@@ -1,10 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Utils ( subWord, rotWord, rcon
-             , mxor,subBytes, subByteVector, shiftRows
-             , invSubBytes, invShiftRows
-             , mixColumns, invMixColumns
-             , chunksOfBS, blocksize
-             , pkcs7, unpkcs7) where
+{-# LANGUAGE TemplateHaskell #-}
+
+module Utils where
 
 import qualified Data.ByteString as BS
 import qualified Data.Bits as B
@@ -16,6 +13,8 @@ import Numeric (showHex,showIntAtBase)
 import Data.Int (Int64)
 import Data.List (unfoldr)
 import qualified System.Random as R
+
+import Data.FileEmbed (embedFile)
 
 import Types
 import GaloisFields
@@ -65,12 +64,16 @@ mxor = Mat.elementwise xor
 addRoundKey :: Mat.Matrix Word8 -> Mat.Matrix Word8 -> Mat.Matrix Word8
 addRoundKey a b = mxor a b
 
-
+-- subBytes from a vector
 subBytes :: Mat.Matrix Word8 -> Mat.Matrix Word8
-subBytes a = fmap ((V.!) subByteVector . fromIntegral) a
+subBytes a = fmap (BS.index subByteFile . fromIntegral) a
 
-subByteVector :: V.Vector Word8
-subByteVector = V.generate 256 (subByte . fromIntegral)
+subByteFile :: BS.ByteString
+subByteFile = $(embedFile "subBytes.hb")
+
+invSubByteFile :: BS.ByteString
+invSubByteFile = $(embedFile "invSubBytes.hb")
+
 
 subByte :: Word8 -> Word8
 subByte b' = b `xor` b4 `xor` b5 `xor` b6 `xor` b7 `xor` c
@@ -82,16 +85,9 @@ subByte b' = b `xor` b4 `xor` b5 `xor` b6 `xor` b7 `xor` c
     b7 = B.rotateR b 7
     c  = 0x63
 
-{-}
-invSubBytes :: Mat.Matrix Word8 -> Mat.Matrix Word8
-invSubBytes a = fmap invSubByte a
--}
 
 invSubBytes :: Mat.Matrix Word8 -> Mat.Matrix Word8
-invSubBytes a = fmap ((V.!) invSubByteVector . fromIntegral) a
-
-invSubByteVector :: V.Vector Word8
-invSubByteVector = V.generate 256 (invSubByte . fromIntegral)
+invSubBytes a = fmap (BS.index invSubByteFile . fromIntegral) a
 
 invSubByte :: Word8 -> Word8
 invSubByte a = gf2Inv $ a2 `xor` a5 `xor` a7 `xor` c 

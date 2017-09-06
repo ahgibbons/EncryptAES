@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Utils ( subWord, rotWord, rcon
-             , mxor,subBytes, shiftRows
+             , mxor,subBytes, subByteVector, shiftRows
              , invSubBytes, invShiftRows
              , mixColumns, invMixColumns
              , chunksOfBS, blocksize
@@ -82,8 +82,16 @@ subByte b' = b `xor` b4 `xor` b5 `xor` b6 `xor` b7 `xor` c
     b7 = B.rotateR b 7
     c  = 0x63
 
+{-}
 invSubBytes :: Mat.Matrix Word8 -> Mat.Matrix Word8
 invSubBytes a = fmap invSubByte a
+-}
+
+invSubBytes :: Mat.Matrix Word8 -> Mat.Matrix Word8
+invSubBytes a = fmap ((V.!) invSubByteVector . fromIntegral) a
+
+invSubByteVector :: V.Vector Word8
+invSubByteVector = V.generate 256 (invSubByte . fromIntegral)
 
 invSubByte :: Word8 -> Word8
 invSubByte a = gf2Inv $ a2 `xor` a5 `xor` a7 `xor` c 

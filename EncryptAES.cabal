@@ -24,6 +24,7 @@ library
                      , Tests
                      , Block
                      , Types
+                     , SpeedTest
   build-depends:       base >= 4.7 && < 5
                      , bytestring
                      , word8
@@ -43,7 +44,7 @@ library
 executable EncryptAES-exe
   hs-source-dirs:      app
   main-is:             Main.hs
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N -O2
   build-depends:       base
                      , EncryptAES
                      , bytestring

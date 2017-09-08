@@ -21,8 +21,8 @@ import GaloisFields
 
 blocksize = 16 :: Int
 
-rconTable :: [Word8]
-rconTable = [ 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40
+rconTable :: V.Vector Word8
+rconTable = V.fromList [ 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40
             , 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a
             , 0x2f, 0x5e, 0xbc, 0x63, 0xc6, 0x97, 0x35, 0x6a
             , 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39 
@@ -56,7 +56,7 @@ rconTable = [ 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40
             , 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d]
 
 rcon :: Int -> Word8
-rcon n = rconTable !! n
+rcon n = rconTable V.! n
 
 mxor :: Mat.Matrix Word8 -> Mat.Matrix Word8 -> Mat.Matrix Word8
 mxor = Mat.elementwise xor
@@ -77,18 +77,6 @@ invSubByteFile :: BS.ByteString
 invSubByteFile = $(embedFile "invSubBytes.hb")
 
 
-{-}
-subByte :: Word8 -> Word8
-subByte b' = b `xor` b4 `xor` b5 `xor` b6 `xor` b7 `xor` c
-  where
-    b = gf2Inv b'
-    b4 = B.rotateR b 4
-    b5 = B.rotateR b 5
-    b6 = B.rotateR b 6
-    b7 = B.rotateR b 7
-    c  = 0x63
--}
-
 invSubByte :: Word8 -> Word8
 invSubByte = BS.index invSubByteFile . fromIntegral
 
@@ -96,15 +84,6 @@ invSubByte = BS.index invSubByteFile . fromIntegral
 invSubBytes :: Mat.Matrix Word8 -> Mat.Matrix Word8
 invSubBytes = fmap invSubByte
 
-{-}
-invSubByte :: Word8 -> Word8
-invSubByte a = gf2Inv $ a2 `xor` a5 `xor` a7 `xor` c 
-  where
-    a2 = B.rotateR a 2
-    a5 = B.rotateR a 5
-    a7 = B.rotateR a 7
-    c = 0x05
--}
 
 rotateList :: Int -> [a] -> [a]
 rotateList _ [] = []

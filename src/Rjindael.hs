@@ -1,9 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Rjindael (encryptAES, decryptAES) where
+module Rjindael where
 
 import qualified Data.ByteString as BS
 import qualified Data.Bits as B
 import Data.Bits ((.&.),(.|.),xor)
+
 
 import Data.Char (intToDigit)
 import Data.Word
@@ -45,8 +46,8 @@ stateMatrixToOutput mat = BS.pack . Mat.toList
                         . Mat.transpose $ mat
 
 
-encryptAES :: AES -> Key -> PlainText -> CipherText
-encryptAES aestype key text = stateMatrixToOutput . mxor rf 
+encryptAES :: AES -> [Mat.Matrix Word8] -> PlainText -> CipherText
+encryptAES aestype roundKeys text = stateMatrixToOutput . mxor rf 
                 . subBytes . shiftRows 
                 . foldl cipherRound initState $ rs
   where
@@ -55,20 +56,18 @@ encryptAES aestype key text = stateMatrixToOutput . mxor rf
                    AES192 -> (nk_192, nr_192)
                    AES256 -> (nk_256, nr_256)
     initState = mxor (inputToStateMatrix text) r0
-    roundKeys = expandKey nk nb nr (BS.unpack key)
     r0 = head roundKeys
     rs = take (nr-1) . tail $ roundKeys
     rf = roundKeys !! nr
               
-decryptAES :: AES -> Key -> CipherText -> PlainText
-decryptAES aestype key text = stateMatrixToOutput . mxor rf . invSubBytes
+decryptAES :: AES -> [Mat.Matrix Word8] -> CipherText -> PlainText
+decryptAES aestype roundKeys text = stateMatrixToOutput . mxor rf . invSubBytes
                    . invShiftRows . foldl invCipherRound initState $ rs
   where
     (nk,nr) = case aestype of
                 AES128 -> (nk_128, nr_128)
                 AES192 -> (nk_192, nr_192)
                 AES256 -> (nk_256, nr_256)
-    roundKeys = reverse . expandKey nk nb nr $ (BS.unpack key)
     r0 = head roundKeys
     rs = take (nr-1) . tail $ roundKeys
     rf = roundKeys !! nr

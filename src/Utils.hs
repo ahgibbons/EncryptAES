@@ -14,12 +14,16 @@ import Data.Int (Int64)
 import Data.List (unfoldr)
 import qualified System.Random as R
 
+import qualified Data.Vector.Storable as VS
+
+import BakeVector
 import Data.FileEmbed (embedFile)
 
 import Types
 import GaloisFields
 
 blocksize = 16 :: Int
+
 
 rconTable :: V.Vector Word8
 rconTable = V.fromList [ 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40
@@ -55,8 +59,15 @@ rconTable = V.fromList [ 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40
             , 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66
             , 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d]
 
+
+
+
+rcon_baked :: VS.Vector Word8
+rcon_baked = $$(bake rcon_vector)
+
+
 rcon :: Int -> Word8
-rcon n = rconTable V.! n
+rcon n = rcon_vector VS.! n
 
 mxor :: Mat.Matrix Word8 -> Mat.Matrix Word8 -> Mat.Matrix Word8
 mxor = Mat.elementwise xor

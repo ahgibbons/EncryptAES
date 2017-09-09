@@ -18,10 +18,9 @@ data GF2 a = GF2 a deriving (Show,Eq)
 data GF2_8 a = GF2_8 a a a a deriving (Show,Eq)
 
 
-
 instance Num (GF2 Int) where
     (GF2 a) + (GF2 b) = GF2 (a `xor` b)
-    (GF2 a) * (GF2 b) = GF2 (pmod (foldr addGF2 0 . multGF2' 1 a $ b) aes_GF2_mod)
+    (GF2 a) * (GF2 b) = GF2 (multGF2 aes_GF2_mod a b)
     negate (GF2 a)    = GF2 a
     signum _          = GF2 1
     abs a             = a
@@ -29,22 +28,13 @@ instance Num (GF2 Int) where
 
 instance Num (GF2 Word8) where
     (GF2 a) + (GF2 b) = GF2 (a `xor` b)
-    (GF2 a) * (GF2 b) = GF2 (fromIntegral (pmod (foldr addGF2 0 . multGF2' 1 a' $ b') aes_GF2_mod))
-                        where
-                          a' = fromIntegral a
-                          b' = fromIntegral b
+    (GF2 a) * (GF2 b) = GF2 (multGF2 aes_GF2_mod a b)
     negate (GF2 a)    = GF2 a
     signum _          = GF2 1
     abs a             = a
     fromInteger i     = GF2 (fromIntegral i)
 
-(.*.) :: GaloisField2 a => a -> a -> a
-(.*.) a b = multGF2 283 a b
-
-(.+.) :: GaloisField2 a => a -> a -> a
-(.+.) a b = addGF2 a b
-
-
+-----
             
 class GaloisField2 a where
   addGF2 :: a -> a -> a
@@ -52,11 +42,25 @@ class GaloisField2 a where
 
 instance GaloisField2 Int where
   addGF2 a b = a `xor` b
-  multGF2 m a b = pmod (foldr addGF2 0 . multGF2' 1 a $ b) m
+  multGF2 = multGF2Int
 
 instance GaloisField2 Word8 where
   addGF2 a b = a `xor` b
-  multGF2 m a b = fromIntegral $ multGF2 m (fromIntegral a :: Int) (fromIntegral b :: Int) 
+  multGF2 = multGF2Word8
+
+(.*.) :: GaloisField2 a => a -> a -> a
+(.*.) a b = multGF2 aes_GF2_mod a b
+
+(.+.) :: GaloisField2 a => a -> a -> a
+(.+.) a b = addGF2 a b
+
+-----
+
+multGF2Int :: Int -> Int -> Int -> Int
+multGF2Int m a b = pmod (foldr addGF2 0 . multGF2' 1 a $ b) m
+
+multGF2Word8 :: Int -> Word8 -> Word8 -> Word8
+multGF2Word8 m a b = fromIntegral $ multGF2 m (fromIntegral a :: Int) (fromIntegral b :: Int) 
 
 addGF2_8 :: (GaloisField2 a) => GF2_8 a -> GF2_8 a -> GF2_8 a
 addGF2_8 (GF2_8 a3 a2 a1 a0) (GF2_8 b3 b2 b1 b0) =
@@ -66,6 +70,8 @@ multGF2_8_list :: [Word8] -> [Word8] -> [Word8]
 multGF2_8_list [a3,a2,a1,a0] [b3,b2,b1,b0] = [d3,d2,d1,d0]
   where
     (GF2_8 d3 d2 d1 d0) = multGF2_8 (GF2_8 a3 a2 a1 a0) (GF2_8 b3 b2 b1 b0)
+
+
           
 multGF2_8 :: (GaloisField2 a) => GF2_8 a -> GF2_8 a -> GF2_8 a
 multGF2_8 (GF2_8 a3 a2 a1 a0) (GF2_8 b3 b2 b1 b0) = GF2_8 d3 d2 d1 d0
@@ -74,6 +80,7 @@ multGF2_8 (GF2_8 a3 a2 a1 a0) (GF2_8 b3 b2 b1 b0) = GF2_8 d3 d2 d1 d0
     d2 = a3 .*. b3 .+. b0 .*. a2 .+. b1 .*. a1 .+. b2 .*. a0
     d1 = a1 .*. b0 .+. b1 .*. a0 .+. a3 .*. b2 .+. a2 .*. b3
     d0 = a0 .*. b0 .+. a3 .*. b1 .+. a2 .*. b2 .+. a1 .*. b3
+
 
 rotWordGF2_8 :: GF2_8 a -> GF2_8 a
 rotWordGF2_8 (GF2_8 a b c d) = (GF2_8 b c d a)
@@ -101,3 +108,12 @@ pmod a m
   where
     leadingM = countLeadingZeros m
     leadingA = countLeadingZeros a
+
+orbit :: Word8 -> [Word8]
+orbit n = 1 : orbit' (n)
+ where
+   orbit' a
+     | a == 1 = []
+     | otherwise = a : orbit' (a .*. n) 
+
+

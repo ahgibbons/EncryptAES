@@ -1,0 +1,276 @@
+	Sun Sep 10 02:53 2017 Time and Allocation Profiling Report  (Final)
+
+	   EncryptAES-exe +RTS -N -p -RTS -e testfile.txt enfile.ctxt
+
+	total time  =        0.02 secs   (18 ticks @ 1000 us, 1 processor)
+	total alloc =  19,808,408 bytes  (excludes profiling overheads)
+
+COST CENTRE  MODULE       SRC                                   %time %alloc
+
+subByte      Utils        src/Utils.hs:82:1-45                   16.7    3.8
+.+.          GaloisFields src/GaloisFields.hs:59:1-22            16.7    0.7
+toLists      Data.Matrix  Data/Matrix.hs:336:1-79                11.1   13.0
+pmod         GaloisFields src/GaloisFields.hs:(109,1)-(114,34)   11.1    3.6
+main         Main         app/Main.hs:(16,1)-(26,24)             11.1    0.3
+elementwise  Data.Matrix  Data/Matrix.hs:(777,1)-(778,26)         5.6   11.4
+subBytes     Utils        src/Utils.hs:79:1-23                    5.6    2.5
+shiftRows    Utils        src/Utils.hs:105:1-71                   5.6    5.8
+rotateList   Utils        src/Utils.hs:(100,1)-(101,54)           5.6    6.0
+.*.          GaloisFields src/GaloisFields.hs:56:1-35             5.6    1.0
+multGF2'     GaloisFields src/GaloisFields.hs:(101,1)-(103,57)    5.6   15.7
+transpose    Data.Matrix  Data/Matrix.hs:535:1-62                 0.0    9.4
+mixColumns   Utils        src/Utils.hs:(119,1)-(120,46)           0.0    7.6
+addGF2       GaloisFields src/GaloisFields.hs:47:3-24             0.0    2.1
+multGF2Int   GaloisFields src/GaloisFields.hs:64:1-61             0.0    7.3
+multGF2Word8 GaloisFields src/GaloisFields.hs:67:1-93             0.0    6.3
+
+
+                                                                                                                                           individual      inherited
+COST CENTRE                        MODULE                            SRC                                                no.     entries  %time %alloc   %time %alloc
+
+MAIN                               MAIN                              <built-in>                                         335          0    0.0    0.1   100.0  100.0
+ CAF                               GHC.Conc.Signal                   <entire-module>                                    389          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.IO.Encoding                   <entire-module>                                    381          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.IO.Encoding.Iconv             <entire-module>                                    379          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.IO.FD                         <entire-module>                                    373          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.IO.Handle.FD                  <entire-module>                                    371          0    0.0    0.2     0.0    0.2
+ CAF                               GHC.IO.Handle.Text                <entire-module>                                    369          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.Event.KQueue                  <entire-module>                                    348          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.Event.Poll                    <entire-module>                                    345          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.Event.Thread                  <entire-module>                                    344          0    0.0    0.0     0.0    0.0
+ CAF:$fGaloisField2Int_$cmultGF2   GaloisFields                      src/GaloisFields.hs:48:3-9                         632          0    0.0    0.0     0.0    0.0
+  multGF2                          GaloisFields                      src/GaloisFields.hs:48:3-22                        811          1    0.0    0.0     0.0    0.0
+ CAF:$fGaloisField2Word8_$cmultGF2 GaloisFields                      src/GaloisFields.hs:52:3-9                         633          0    0.0    0.0     0.0    0.0
+  multGF2                          GaloisFields                      src/GaloisFields.hs:52:3-24                        809          1    0.0    0.0     0.0    0.0
+ CAF:aes_GF2_mod                   GaloisFields                      src/GaloisFields.hs:17:1-11                        634          0    0.0    0.0     0.0    0.0
+  aes_GF2_mod                      GaloisFields                      src/GaloisFields.hs:17:1-24                        812          1    0.0    0.0     0.0    0.0
+ CAF:blocksize                     Utils                             src/Utils.hs:25:1-9                                625          0    0.0    0.0     0.0    0.0
+  blocksize                        Utils                             src/Utils.hs:25:1-21                               690          1    0.0    0.0     0.0    0.0
+ CAF:cbcEncrypt2                   Block                             <no location info>                                 526          0    0.0    0.0     0.0    0.0
+  cbcEncrypt                       Block                             src/Block.hs:(37,1)-(44,81)                        683          0    0.0    0.0     0.0    0.0
+   cbcEncrypt.ptext'               Block                             src/Block.hs:43:5-59                               684          0    0.0    0.0     0.0    0.0
+    chunksOfBS                     Utils                             src/Utils.hs:164:1-59                              685          1    0.0    0.0     0.0    0.0
+     nothingWhen                   Utils                             src/Utils.hs:161:1-34                              687          1    0.0    0.0     0.0    0.0
+ CAF:main1                         Main                              <no location info>                                 668          0    0.0    0.0     0.0    0.0
+  main                             Main                              app/Main.hs:(16,1)-(26,24)                         670          1    0.0    0.0     0.0    0.0
+ CAF:main2                         Main                              <no location info>                                 667          0    0.0    0.0     0.0    0.0
+  main                             Main                              app/Main.hs:(16,1)-(26,24)                         884          0    0.0    0.0     0.0    0.0
+ CAF:main5                         Main                              <no location info>                                 665          0    0.0    0.0     0.0    0.0
+  main                             Main                              app/Main.hs:(16,1)-(26,24)                         678          0    0.0    0.0     0.0    0.0
+   main.outtext                    Main                              app/Main.hs:(22,9)-(24,70)                         679          0    0.0    0.0     0.0    0.0
+ CAF:main6                         Main                              <no location info>                                 666          0    0.0    0.0     0.0    0.0
+  main                             Main                              app/Main.hs:(16,1)-(26,24)                         676          0    0.0    0.0     0.0    0.0
+   main.outtext                    Main                              app/Main.hs:(22,9)-(24,70)                         677          0    0.0    0.0     0.0    0.0
+ CAF:mxor                          Utils                             src/Utils.hs:73:1-4                                592          0    0.0    0.0     0.0    0.0
+  mxor                             Utils                             src/Utils.hs:73:1-26                               697          1    0.0    0.0     0.0    0.0
+ CAF:nb                            Rjindael                          src/Rjindael.hs:23:1-2                             657          0    0.0    0.0     0.0    0.0
+  nb                               Rjindael                          src/Rjindael.hs:23:1-13                            711          1    0.0    0.0     0.0    0.0
+ CAF:nk_128                        Rjindael                          src/Rjindael.hs:24:1-6                             658          0    0.0    0.0     0.0    0.0
+  nk_128                           Rjindael                          src/Rjindael.hs:24:1-17                            704          1    0.0    0.0     0.0    0.0
+ CAF:nr_128                        Rjindael                          src/Rjindael.hs:27:1-6                             661          0    0.0    0.0     0.0    0.0
+  nr_128                           Rjindael                          src/Rjindael.hs:27:1-18                            701          1    0.0    0.0     0.0    0.0
+ CAF:rcon2                         Utils                             <no location info>                                 628          0    0.0    0.0     0.0    0.0
+  rcon                             Utils                             src/Utils.hs:70:1-27                               751          0    0.0    0.0     0.0    0.0
+   unId                            Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                752          1    0.0    0.0     0.0    0.0
+ CAF:rcon_vector                   BakeVector                        src/BakeVector.hs:29:1-11                          519          0    0.0    0.0     0.0    0.1
+  rcon_vector                      BakeVector                        src/BakeVector.hs:(29,1)-(60,61)                   753          1    0.0    0.1     0.0    0.1
+   unId                            Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                757        257    0.0    0.0     0.0    0.0
+   sChunks                         Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:114:30-36     756          1    0.0    0.0     0.0    0.0
+   sSize                           Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:116:30-34     755          1    0.0    0.0     0.0    0.0
+   upperBound                      Data.Vector.Fusion.Bundle.Size    Data/Vector/Fusion/Bundle/Size.hs:(118,1)-(120,30) 754          1    0.0    0.0     0.0    0.0
+ CAF:shiftRows3                    Utils                             <no location info>                                 591          0    0.0    0.0     0.0    0.0
+  shiftRows                        Utils                             src/Utils.hs:105:1-71                              762          0    0.0    0.0     0.0    0.0
+ CAF:subByte                       Utils                             src/Utils.hs:82:1-7                                622          0    0.0    0.0     0.0    0.0
+  subByte                          Utils                             src/Utils.hs:82:1-45                               747          1    0.0    0.0     0.0    0.0
+ CAF:subByteFile                   Utils                             src/Utils.hs:85:1-11                               621          0    0.0    0.0     0.0    0.0
+  subByteFile                      Utils                             src/Utils.hs:85:1-40                               749          1    0.0    0.0     0.0    0.0
+ CAF:subBytes                      Utils                             src/Utils.hs:79:1-8                                624          0    0.0    0.0     0.0    0.0
+  subBytes                         Utils                             src/Utils.hs:79:1-23                               759          1    0.0    0.0     0.0    0.0
+ CAF:subWord                       Utils                             src/Utils.hs:135:1-7                               623          0    0.0    0.0     0.0    0.0
+  subWord                          Utils                             src/Utils.hs:135:1-21                              719          1    0.0    0.0     0.0    0.0
+ CAF:tiv                           Tests                             src/Tests.hs:55:1-3                                572          0    0.0    0.0     0.0    0.0
+  tiv                              Tests                             src/Tests.hs:55:1-24                               693          1    0.0    0.0     0.0    0.0
+ CAF:tiv1                          Tests                             <no location info>                                 571          0    0.0    0.0     0.0    0.0
+  tiv                              Tests                             src/Tests.hs:55:1-24                               694          0    0.0    0.0     0.0    0.0
+ CAF:tkey                          Tests                             src/Tests.hs:15:1-4                                528          0    0.0    0.0     0.0    0.0
+  tkey                             Tests                             src/Tests.hs:(15,1)-(18,28)                        716          1    0.0    0.0     0.0    0.0
+ main                              Main                              app/Main.hs:(16,1)-(26,24)                         671          0   11.1    0.3   100.0   99.6
+  main.flag                        Main                              app/Main.hs:18:9-27                                674          1    0.0    0.0     0.0    0.0
+  main.fpath                       Main                              app/Main.hs:19:9-27                                672          1    0.0    0.0     0.0    0.0
+  main.outpath                     Main                              app/Main.hs:20:9-27                                673          1    0.0    0.0     0.0    0.0
+  main.outtext                     Main                              app/Main.hs:(22,9)-(24,70)                         675          1    0.0    0.0    88.9   99.3
+   cbcEncrypt                      Block                             src/Block.hs:(37,1)-(44,81)                        680          1    0.0    0.0    88.9   99.3
+    cbcEncrypt.ctext'              Block                             src/Block.hs:44:5-81                               681          1    0.0    0.0    88.9   98.7
+     cbcEncrypt.ctext'.\           Block                             src/Block.hs:44:31-70                              695         45    0.0    0.2    88.9   98.7
+      encryptAES                   Rjindael                          src/Rjindael.hs:(50,1)-(61,24)                     696         45    0.0    0.1    88.9   98.4
+       cipherRound                 Rjindael                          src/Rjindael.hs:(77,1)-(78,59)                     764        405    0.0    0.5    83.3   91.8
+        mixColumns                 Utils                             src/Utils.hs:(119,1)-(120,46)                      786        405    0.0    7.6    38.9   59.3
+         unId                      Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                806       6885    0.0    0.0     0.0    0.0
+         mixColumn                 Utils                             src/Utils.hs:(111,1)-(116,52)                      799       1620    0.0    0.0    38.9   37.1
+          mixColumn.s0'            Utils                             src/Utils.hs:113:5-52                              807       1620    0.0    0.0    11.1    9.3
+           .+.                     GaloisFields                      src/GaloisFields.hs:59:1-22                        872       4860    0.0    0.1     0.0    0.3
+            addGF2                 GaloisFields                      src/GaloisFields.hs:51:3-24                        873       4860    0.0    0.1     0.0    0.1
+           .*.                     GaloisFields                      src/GaloisFields.hs:56:1-35                        808       3240    5.6    0.3    11.1    9.0
+            multGF2Word8           GaloisFields                      src/GaloisFields.hs:67:1-93                        810       3240    0.0    1.6     5.6    8.8
+             multGF2Int            GaloisFields                      src/GaloisFields.hs:64:1-61                        813       3240    0.0    1.8     5.6    7.2
+              multGF2'             GaloisFields                      src/GaloisFields.hs:(101,1)-(103,57)               814       9720    0.0    3.9     0.0    3.9
+              addGF2               GaloisFields                      src/GaloisFields.hs:47:3-24                        815       6480    0.0    0.5     0.0    0.5
+              pmod                 GaloisFields                      src/GaloisFields.hs:(109,1)-(114,34)               869       4856    5.6    0.9     5.6    0.9
+               pmod.leadingA       GaloisFields                      src/GaloisFields.hs:114:5-34                       871       4856    0.0    0.0     0.0    0.0
+               pmod.leadingM       GaloisFields                      src/GaloisFields.hs:113:5-34                       870       4856    0.0    0.0     0.0    0.0
+          mixColumn.s1'            Utils                             src/Utils.hs:114:5-52                              828       1620    0.0    0.0    22.2    9.3
+           .+.                     GaloisFields                      src/GaloisFields.hs:59:1-22                        877       4860   11.1    0.1    11.1    0.3
+            addGF2                 GaloisFields                      src/GaloisFields.hs:51:3-24                        878       4860    0.0    0.1     0.0    0.1
+           .*.                     GaloisFields                      src/GaloisFields.hs:56:1-35                        829       3240    0.0    0.3    11.1    9.0
+            multGF2Word8           GaloisFields                      src/GaloisFields.hs:67:1-93                        830       3240    0.0    1.6    11.1    8.8
+             multGF2Int            GaloisFields                      src/GaloisFields.hs:64:1-61                        831       3240    0.0    1.8    11.1    7.2
+              multGF2'             GaloisFields                      src/GaloisFields.hs:(101,1)-(103,57)               832       9720    5.6    3.9     5.6    3.9
+              addGF2               GaloisFields                      src/GaloisFields.hs:47:3-24                        833       6480    0.0    0.5     0.0    0.5
+              pmod                 GaloisFields                      src/GaloisFields.hs:(109,1)-(114,34)               874       4843    5.6    0.9     5.6    0.9
+               pmod.leadingA       GaloisFields                      src/GaloisFields.hs:114:5-34                       876       4843    0.0    0.0     0.0    0.0
+               pmod.leadingM       GaloisFields                      src/GaloisFields.hs:113:5-34                       875       4843    0.0    0.0     0.0    0.0
+          mixColumn.s2'            Utils                             src/Utils.hs:115:5-52                              834       1620    0.0    0.0     5.6    9.4
+           .+.                     GaloisFields                      src/GaloisFields.hs:59:1-22                        882       4860    5.6    0.3     5.6    0.4
+            addGF2                 GaloisFields                      src/GaloisFields.hs:51:3-24                        883       4860    0.0    0.1     0.0    0.1
+           .*.                     GaloisFields                      src/GaloisFields.hs:56:1-35                        835       3240    0.0    0.3     0.0    9.0
+            multGF2Word8           GaloisFields                      src/GaloisFields.hs:67:1-93                        836       3240    0.0    1.6     0.0    8.8
+             multGF2Int            GaloisFields                      src/GaloisFields.hs:64:1-61                        837       3240    0.0    1.8     0.0    7.2
+              multGF2'             GaloisFields                      src/GaloisFields.hs:(101,1)-(103,57)               838       9720    0.0    3.9     0.0    3.9
+              addGF2               GaloisFields                      src/GaloisFields.hs:47:3-24                        839       6480    0.0    0.5     0.0    0.5
+              pmod                 GaloisFields                      src/GaloisFields.hs:(109,1)-(114,34)               879       4821    0.0    0.9     0.0    0.9
+               pmod.leadingA       GaloisFields                      src/GaloisFields.hs:114:5-34                       881       4821    0.0    0.0     0.0    0.0
+               pmod.leadingM       GaloisFields                      src/GaloisFields.hs:113:5-34                       880       4821    0.0    0.0     0.0    0.0
+          mixColumn.s3'            Utils                             src/Utils.hs:116:5-52                              840       1620    0.0    0.0     0.0    9.2
+           .+.                     GaloisFields                      src/GaloisFields.hs:59:1-22                        867       4860    0.0    0.1     0.0    0.1
+            addGF2                 GaloisFields                      src/GaloisFields.hs:51:3-24                        868       4860    0.0    0.0     0.0    0.0
+           .*.                     GaloisFields                      src/GaloisFields.hs:56:1-35                        841       3240    0.0    0.3     0.0    9.0
+            multGF2Word8           GaloisFields                      src/GaloisFields.hs:67:1-93                        842       3240    0.0    1.6     0.0    8.8
+             multGF2Int            GaloisFields                      src/GaloisFields.hs:64:1-61                        843       3240    0.0    1.8     0.0    7.2
+              multGF2'             GaloisFields                      src/GaloisFields.hs:(101,1)-(103,57)               844       9720    0.0    3.9     0.0    3.9
+              addGF2               GaloisFields                      src/GaloisFields.hs:47:3-24                        845       6480    0.0    0.5     0.0    0.5
+              pmod                 GaloisFields                      src/GaloisFields.hs:(109,1)-(114,34)               864       4834    0.0    0.9     0.0    0.9
+               pmod.leadingA       GaloisFields                      src/GaloisFields.hs:114:5-34                       866       4834    0.0    0.0     0.0    0.0
+               pmod.leadingM       GaloisFields                      src/GaloisFields.hs:113:5-34                       865       4834    0.0    0.0     0.0    0.0
+         transpose                 Data.Matrix                       Data/Matrix.hs:535:1-62                            793        810    0.0    8.3     0.0    8.3
+          safeGet                  Data.Matrix                       Data/Matrix.hs:(454,1)-(456,37)                    801      12960    0.0    0.0     0.0    0.0
+           unId                    Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                802      12960    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data/Matrix.hs:112:4-8                             794        810    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data/Matrix.hs:111:4-8                             795        810    0.0    0.0     0.0    0.0
+         sChunks                   Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:114:30-36     805        405    0.0    0.0     0.0    0.0
+         sSize                     Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:116:30-34     804        405    0.0    0.0     0.0    0.0
+         toLists                   Data.Matrix                       Data/Matrix.hs:336:1-79                            796        405    0.0    6.2     0.0    6.2
+          unId                     Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                816       6480    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data/Matrix.hs:112:4-8                             800        405    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data/Matrix.hs:111:4-8                             797        405    0.0    0.0     0.0    0.0
+         upperBound                Data.Vector.Fusion.Bundle.Size    Data/Vector/Fusion/Bundle/Size.hs:(118,1)-(120,30) 803        405    0.0    0.0     0.0    0.0
+        shiftRows                  Utils                             src/Utils.hs:105:1-71                              787        405    5.6    5.2    22.2   16.8
+         unId                      Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                820       6885    0.0    0.0     0.0    0.0
+         rotateList                Utils                             src/Utils.hs:(100,1)-(101,54)                      791       1620    5.6    5.4     5.6    5.4
+         sChunks                   Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:114:30-36     819        405    0.0    0.0     0.0    0.0
+         sSize                     Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:116:30-34     818        405    0.0    0.0     0.0    0.0
+         toLists                   Data.Matrix                       Data/Matrix.hs:336:1-79                            789        405   11.1    6.2    11.1    6.2
+          unId                     Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                821       6480    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data/Matrix.hs:112:4-8                             792        405    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data/Matrix.hs:111:4-8                             790        405    0.0    0.0     0.0    0.0
+         upperBound                Data.Vector.Fusion.Bundle.Size    Data/Vector/Fusion/Bundle/Size.hs:(118,1)-(120,30) 817        405    0.0    0.0     0.0    0.0
+        mxor                       Utils                             src/Utils.hs:73:1-26                               765          0    0.0    0.2     5.6    9.5
+         elementwise               Data.Matrix                       Data/Matrix.hs:(777,1)-(778,26)                    766        405    5.6    9.3     5.6    9.3
+          safeGet                  Data.Matrix                       Data/Matrix.hs:(454,1)-(456,37)                    784      12960    0.0    0.0     0.0    0.0
+           unId                    Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                785      12960    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data/Matrix.hs:112:4-8                             768        405    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data/Matrix.hs:111:4-8                             767        405    0.0    0.0     0.0    0.0
+        subBytes                   Utils                             src/Utils.hs:79:1-23                               788          0    0.0    2.3    16.7    5.7
+         unId                      Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                826       6885    0.0    0.0     0.0    0.0
+         sSize                     Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:116:30-34     824        810    0.0    0.0     0.0    0.0
+         sChunks                   Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:114:30-36     825        405    0.0    0.0     0.0    0.0
+         sElems                    Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:113:30-35     822        405    0.0    0.0     0.0    0.0
+         upperBound                Data.Vector.Fusion.Bundle.Size    Data/Vector/Fusion/Bundle/Size.hs:(118,1)-(120,30) 823        405    0.0    0.0     0.0    0.0
+         subByte                   Utils                             src/Utils.hs:82:1-45                               827          0   16.7    3.4    16.7    3.4
+       encryptAES.(...)            Rjindael                          src/Rjindael.hs:(54,5)-(57,45)                     700         45    0.0    0.0     0.0    0.0
+       encryptAES.initState        Rjindael                          src/Rjindael.hs:58:5-49                            846         45    0.0    0.0     0.0    1.8
+        inputToStateMatrix         Rjindael                          src/Rjindael.hs:42:1-71                            848         45    0.0    0.2     0.0    0.7
+         unId                      Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                862        765    0.0    0.0     0.0    0.0
+         sChunks                   Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:114:30-36     861         45    0.0    0.0     0.0    0.0
+         sSize                     Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:116:30-34     860         45    0.0    0.0     0.0    0.0
+         transpose                 Data.Matrix                       Data/Matrix.hs:535:1-62                            849         45    0.0    0.5     0.0    0.5
+          safeGet                  Data.Matrix                       Data/Matrix.hs:(454,1)-(456,37)                    857        720    0.0    0.0     0.0    0.0
+           unId                    Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                858        720    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data/Matrix.hs:112:4-8                             850         45    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data/Matrix.hs:111:4-8                             851         45    0.0    0.0     0.0    0.0
+         upperBound                Data.Vector.Fusion.Bundle.Size    Data/Vector/Fusion/Bundle/Size.hs:(118,1)-(120,30) 859         45    0.0    0.0     0.0    0.0
+        mxor                       Utils                             src/Utils.hs:73:1-26                               847          0    0.0    0.0     0.0    1.1
+         elementwise               Data.Matrix                       Data/Matrix.hs:(777,1)-(778,26)                    852         45    0.0    1.0     0.0    1.0
+          safeGet                  Data.Matrix                       Data/Matrix.hs:(454,1)-(456,37)                    855       1440    0.0    0.0     0.0    0.0
+           unId                    Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                856       1440    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data/Matrix.hs:112:4-8                             854         45    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data/Matrix.hs:111:4-8                             853         45    0.0    0.0     0.0    0.0
+       encryptAES.nr               Rjindael                          src/Rjindael.hs:(54,5)-(57,45)                     702         45    0.0    0.0     0.0    0.0
+       encryptAES.r0               Rjindael                          src/Rjindael.hs:59:5-23                            863         45    0.0    0.0     0.0    0.0
+       encryptAES.rf               Rjindael                          src/Rjindael.hs:61:5-24                            699         45    0.0    0.0     0.0    0.0
+       encryptAES.rs               Rjindael                          src/Rjindael.hs:60:5-39                            763         45    0.0    0.1     0.0    0.1
+       shiftRows                   Utils                             src/Utils.hs:105:1-71                              761         45    0.0    0.6     0.0    1.9
+        unId                       Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                776        765    0.0    0.0     0.0    0.0
+        rotateList                 Utils                             src/Utils.hs:(100,1)-(101,54)                      771        180    0.0    0.6     0.0    0.6
+        sChunks                    Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:114:30-36     775         45    0.0    0.0     0.0    0.0
+        sSize                      Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:116:30-34     774         45    0.0    0.0     0.0    0.0
+        toLists                    Data.Matrix                       Data/Matrix.hs:336:1-79                            769         45    0.0    0.7     0.0    0.7
+         unId                      Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                783        720    0.0    0.0     0.0    0.0
+         ncols                     Data.Matrix                       Data/Matrix.hs:112:4-8                             772         45    0.0    0.0     0.0    0.0
+         nrows                     Data.Matrix                       Data/Matrix.hs:111:4-8                             770         45    0.0    0.0     0.0    0.0
+        upperBound                 Data.Vector.Fusion.Bundle.Size    Data/Vector/Fusion/Bundle/Size.hs:(118,1)-(120,30) 773         45    0.0    0.0     0.0    0.0
+       stateMatrixToOutput         Rjindael                          src/Rjindael.hs:(45,1)-(46,45)                     729         45    0.0    0.0     0.0    1.1
+        toList                     Data.Matrix                       Data/Matrix.hs:326:1-74                            733         45    0.0    0.6     0.0    0.6
+         unId                      Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                736        720    0.0    0.0     0.0    0.0
+         ncols                     Data.Matrix                       Data/Matrix.hs:112:4-8                             735         45    0.0    0.0     0.0    0.0
+         nrows                     Data.Matrix                       Data/Matrix.hs:111:4-8                             734         45    0.0    0.0     0.0    0.0
+        transpose                  Data.Matrix                       Data/Matrix.hs:535:1-62                            730         45    0.0    0.5     0.0    0.5
+         safeGet                   Data.Matrix                       Data/Matrix.hs:(454,1)-(456,37)                    737        720    0.0    0.0     0.0    0.0
+          unId                     Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                738        720    0.0    0.0     0.0    0.0
+         ncols                     Data.Matrix                       Data/Matrix.hs:112:4-8                             731         45    0.0    0.0     0.0    0.0
+         nrows                     Data.Matrix                       Data/Matrix.hs:111:4-8                             732         45    0.0    0.0     0.0    0.0
+       mxor                        Utils                             src/Utils.hs:73:1-26                               698          0    0.0    0.0     0.0    1.1
+        elementwise                Data.Matrix                       Data/Matrix.hs:(777,1)-(778,26)                    726         45    0.0    1.0     0.0    1.0
+         safeGet                   Data.Matrix                       Data/Matrix.hs:(454,1)-(456,37)                    739       1440    0.0    0.0     0.0    0.0
+          unId                     Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                740       1440    0.0    0.0     0.0    0.0
+         ncols                     Data.Matrix                       Data/Matrix.hs:112:4-8                             728         45    0.0    0.0     0.0    0.0
+         nrows                     Data.Matrix                       Data/Matrix.hs:111:4-8                             727         45    0.0    0.0     0.0    0.0
+       subBytes                    Utils                             src/Utils.hs:79:1-23                               760          0    5.6    0.3     5.6    0.6
+        unId                       Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                781        765    0.0    0.0     0.0    0.0
+        sSize                      Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:116:30-34     779         90    0.0    0.0     0.0    0.0
+        sChunks                    Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:114:30-36     780         45    0.0    0.0     0.0    0.0
+        sElems                     Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:113:30-35     777         45    0.0    0.0     0.0    0.0
+        upperBound                 Data.Vector.Fusion.Bundle.Size    Data/Vector/Fusion/Bundle/Size.hs:(118,1)-(120,30) 778         45    0.0    0.0     0.0    0.0
+        subByte                    Utils                             src/Utils.hs:82:1-45                               782          0    0.0    0.4     0.0    0.4
+    cbcEncrypt.ptext'              Block                             src/Block.hs:43:5-59                               682          1    0.0    0.0     0.0    0.1
+     pkcs7                         Utils                             src/Utils.hs:(144,1)-(146,76)                      691          1    0.0    0.0     0.0    0.0
+      pkcs7.n                      Utils                             src/Utils.hs:146:5-76                              692          1    0.0    0.0     0.0    0.0
+     chunksOfBS                    Utils                             src/Utils.hs:164:1-59                              686          0    0.0    0.0     0.0    0.1
+      nothingWhen                  Utils                             src/Utils.hs:161:1-34                              688          0    0.0    0.0     0.0    0.0
+       justWhen                    Utils                             src/Utils.hs:158:1-52                              689         46    0.0    0.0     0.0    0.0
+    cbcEncrypt.roundKeys           Block                             src/Block.hs:(39,5)-(42,70)                        703          1    0.0    0.0     0.0    0.5
+     expandKey                     KeyExpansion                      src/KeyExpansion.hs:(15,1)-(17,51)                 705          1    0.0    0.1     0.0    0.5
+      unId                         Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                746        187    0.0    0.0     0.0    0.0
+      sChunks                      Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:114:30-36     745         11    0.0    0.0     0.0    0.0
+      sSize                        Data.Vector.Fusion.Bundle.Monadic Data/Vector/Fusion/Bundle/Monadic.hs:116:30-34     744         11    0.0    0.0     0.0    0.0
+      transpose                    Data.Matrix                       Data/Matrix.hs:535:1-62                            723         11    0.0    0.1     0.0    0.1
+       safeGet                     Data.Matrix                       Data/Matrix.hs:(454,1)-(456,37)                    741        176    0.0    0.0     0.0    0.0
+        unId                       Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                742        176    0.0    0.0     0.0    0.0
+       ncols                       Data.Matrix                       Data/Matrix.hs:112:4-8                             724         11    0.0    0.0     0.0    0.0
+       nrows                       Data.Matrix                       Data/Matrix.hs:111:4-8                             725         11    0.0    0.0     0.0    0.0
+      upperBound                   Data.Vector.Fusion.Bundle.Size    Data/Vector/Fusion/Bundle/Size.hs:(118,1)-(120,30) 743         11    0.0    0.0     0.0    0.0
+      chunksOf                     Data.List.Split.Internals         src/Data/List/Split/Internals.hs:(514,1)-(517,49)  709          1    0.0    0.0     0.0    0.0
+       build                       Data.List.Split.Internals         src/Data/List/Split/Internals.hs:499:1-18          710          1    0.0    0.0     0.0    0.0
+      expandKey.expanded           KeyExpansion                      src/KeyExpansion.hs:17:9-51                        708          1    0.0    0.0     0.0    0.3
+       expandKey''                 KeyExpansion                      src/KeyExpansion.hs:(23,1)-(33,22)                 712         40    0.0    0.1     0.0    0.3
+        expandKey''.imod           KeyExpansion                      src/KeyExpansion.hs:25:25-41                       717         40    0.0    0.0     0.0    0.0
+        expandKey''.temp           KeyExpansion                      src/KeyExpansion.hs:(26,25)-(30,46)                718         40    0.0    0.0     0.0    0.1
+         rcon                      Utils                             src/Utils.hs:70:1-27                               750         10    0.0    0.0     0.0    0.0
+          unId                     Data.Vector.Fusion.Util           Data/Vector/Fusion/Util.hs:22:21-24                758         10    0.0    0.0     0.0    0.0
+         rotWord                   Utils                             src/Utils.hs:138:1-37                              721         10    0.0    0.0     0.0    0.0
+         subWord                   Utils                             src/Utils.hs:135:1-21                              720          0    0.0    0.0     0.0    0.0
+          subByte                  Utils                             src/Utils.hs:82:1-45                               748          0    0.0    0.0     0.0    0.0
+        expandKey''.temp'          KeyExpansion                      src/KeyExpansion.hs:24:25-44                       722         40    0.0    0.0     0.0    0.0
+        expandKey''.wn             KeyExpansion                      src/KeyExpansion.hs:31:25-57                       714         40    0.0    0.1     0.0    0.1
+      expandKey.ws                 KeyExpansion                      src/KeyExpansion.hs:16:9-30                        706          1    0.0    0.0     0.0    0.0
+       expandKey'                  KeyExpansion                      src/KeyExpansion.hs:20:1-67                        707          1    0.0    0.0     0.0    0.0
+        expandKey'.\               KeyExpansion                      src/KeyExpansion.hs:20:32-56                       715          4    0.0    0.0     0.0    0.0

@@ -1,0 +1,462 @@
+	Sun Sep 10 11:48 2017 Time and Allocation Profiling Report  (Final)
+
+	   EncryptAES-exe.exe +RTS -N -p -RTS -e .\testfiles\t1.txt .\testfiles\e1.ctxt
+
+	total time  =        2.47 secs   (2471 ticks @ 1000 us, 1 processor)
+	total alloc = 18,345,243,608 bytes  (excludes profiling overheads)
+
+COST CENTRE       MODULE                            SRC                                                    %time %alloc
+
+mixColumns        Utils                             src\Utils.hs:(119,1)-(120,46)                            8.1    7.7
+basicUnsafeIndexM Data.Vector                       Data\Vector.hs:253:3-62                                  7.1    0.4
+multGF2Int        GaloisFields                      src\GaloisFields.hs:64:1-61                              7.0    4.8
+shiftRows         Utils                             src\Utils.hs:105:1-71                                    6.6    6.8
+subByte           Utils                             src\Utils.hs:82:1-45                                     5.1    2.5
+toLists           Data.Matrix                       Data\Matrix.hs:336:1-79                                  5.1    9.1
+>>=               Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:33:3-18                       4.6    3.9
+fmap              Data.Vector.Fusion.Stream.Monadic Data\Vector\Fusion\Stream\Monadic.hs:(125,3)-(127,20)    4.4    4.6
+basicUnsafeWrite  Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                          4.4    2.8
+multGF2'          GaloisFields                      src\GaloisFields.hs:(101,1)-(103,57)                     4.2   10.2
+multGF2Word8      GaloisFields                      src\GaloisFields.hs:67:1-93                              4.1    4.1
+fmap              Data.Matrix                       Data\Matrix.hs:158:2-53                                  3.8    3.7
+transpose         Data.Matrix                       Data\Matrix.hs:535:1-62                                  3.4    5.8
+safeGet           Data.Matrix                       Data\Matrix.hs:(454,1)-(456,37)                          3.3    8.0
+pmod              GaloisFields                      src\GaloisFields.hs:(109,1)-(114,34)                     3.0    2.4
+rotateList        Utils                             src\Utils.hs:(100,1)-(101,54)                            2.8    3.9
+elementwise       Data.Matrix                       Data\Matrix.hs:(777,1)-(778,26)                          2.7    4.2
+basicUnsafeNew    Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                   2.7    2.4
+elementwise.\     Data.Matrix                       Data\Matrix.hs:778:9-26                                  2.6    4.0
+basicUnsafeSlice  Data.Vector.Mutable               Data\Vector\Mutable.hs:88:3-62                           1.7    2.4
+.*.               GaloisFields                      src\GaloisFields.hs:56:1-35                              1.6    0.7
+basicUnsafeFreeze Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                          1.5    1.2
+.+.               GaloisFields                      src\GaloisFields.hs:59:1-22                              1.5    0.4
+addGF2            GaloisFields                      src\GaloisFields.hs:47:3-24                              1.2    1.4
+primitive         Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                      1.1    0.0
+
+
+                                                                                                                                                individual      inherited
+COST CENTRE                        MODULE                            SRC                                                   no.       entries  %time %alloc   %time %alloc
+
+MAIN                               MAIN                              <built-in>                                             6673          0    0.0    0.0   100.0  100.0
+ CAF                               GHC.IO.Encoding.CodePage          <entire-module>                                       13337          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.Conc.Windows                  <entire-module>                                       13330          0    0.0    0.0     0.0    0.0
+ CAF                               System.Environment                <entire-module>                                       13328          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.IO.Handle.Text                <entire-module>                                       13322          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.IO.FD                         <entire-module>                                       13320          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.IO.Encoding                   <entire-module>                                       13319          0    0.0    0.0     0.0    0.0
+ CAF                               GHC.IO.Handle.FD                  <entire-module>                                       13305          0    0.0    0.0     0.0    0.0
+ CAF:$fGaloisField2Int_$cmultGF2   GaloisFields                      src\GaloisFields.hs:48:3-9                             6871          0    0.0    0.0     0.0    0.0
+  multGF2                          GaloisFields                      src\GaloisFields.hs:48:3-22                           13620          1    0.0    0.0     0.0    0.0
+ CAF:$fGaloisField2Word8_$cmultGF2 GaloisFields                      src\GaloisFields.hs:52:3-9                             6872          0    0.0    0.0     0.0    0.0
+  multGF2                          GaloisFields                      src\GaloisFields.hs:52:3-24                           13618          1    0.0    0.0     0.0    0.0
+ CAF:$fMonadBox_$creturn           Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:46:3-8                     11254          0    0.0    0.0     0.0    0.0
+  return                           Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:46:3-19                    13553          1    0.0    0.0     0.0    0.0
+ CAF:$fMonadId1                    Data.Vector.Fusion.Util           <no location info>                                    11251          0    0.0    0.0     0.0    0.0
+  return                           Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:32:3-17                    13424          1    0.0    0.0     0.0    0.0
+ CAF:$fPrimMonadST1_r98A           Control.Monad.Primitive           <no location info>                                    13032          0    0.0    0.0     0.0    0.0
+  primitive                        Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13462          1    0.0    0.0     0.0    0.0
+ CAF:aes_GF2_mod                   GaloisFields                      src\GaloisFields.hs:17:1-11                            6874          0    0.0    0.0     0.0    0.0
+  aes_GF2_mod                      GaloisFields                      src\GaloisFields.hs:17:1-24                           13621          1    0.0    0.0     0.0    0.0
+ CAF:blocksize                     Utils                             src\Utils.hs:25:1-9                                    6824          0    0.0    0.0     0.0    0.0
+  blocksize                        Utils                             src\Utils.hs:25:1-21                                  13366          1    0.0    0.0     0.0    0.0
+ CAF:cbcEncrypt2                   Block                             <no location info>                                     6733          0    0.0    0.0     0.0    0.0
+  cbcEncrypt                       Block                             src\Block.hs:(37,1)-(44,81)                           13359          0    0.0    0.0     0.0    0.0
+   cbcEncrypt.ptext'               Block                             src\Block.hs:43:5-59                                  13360          0    0.0    0.0     0.0    0.0
+    chunksOfBS                     Utils                             src\Utils.hs:164:1-59                                 13361          1    0.0    0.0     0.0    0.0
+     nothingWhen                   Utils                             src\Utils.hs:161:1-34                                 13363          1    0.0    0.0     0.0    0.0
+ CAF:doBoundsChecks                Data.Vector.Internal.Check        Data\Vector\Internal\Check.hs:55:1-14                 11240          0    0.0    0.0     0.0    0.0
+  doBoundsChecks                   Data.Vector.Internal.Check        Data\Vector\Internal\Check.hs:55:1-21                 13416          1    0.0    0.0     0.0    0.0
+ CAF:doInternalChecks              Data.Vector.Internal.Check        Data\Vector\Internal\Check.hs:71:1-16                 11242          0    0.0    0.0     0.0    0.0
+  doInternalChecks                 Data.Vector.Internal.Check        Data\Vector\Internal\Check.hs:71:1-24                 13453          1    0.0    0.0     0.0    0.0
+ CAF:doUnsafeChecks                Data.Vector.Internal.Check        Data\Vector\Internal\Check.hs:64:1-14                 11241          0    0.0    0.0     0.0    0.0
+  doUnsafeChecks                   Data.Vector.Internal.Check        Data\Vector\Internal\Check.hs:64:1-22                 13413          1    0.0    0.0     0.0    0.0
+ CAF:lvl326_rvP7                   Utils                             <no location info>                                     6772          0    0.0    0.0     0.0    0.0
+  shiftRows                        Utils                             src\Utils.hs:105:1-71                                 13517          0    0.0    0.0     0.0    0.0
+ CAF:lvl9_rrvn                     BakeVector                        <no location info>                                     6850          0    0.0    0.0     0.0    0.0
+ CAF:main1                         Main                              <no location info>                                     6684          0    0.0    0.0     0.0    0.0
+  main                             Main                              app\Main.hs:(16,1)-(26,24)                            13346          1    0.0    0.0     0.0    0.0
+ CAF:main3                         Main                              <no location info>                                     6683          0    0.0    0.0     0.0    0.0
+  main                             Main                              app\Main.hs:(16,1)-(26,24)                            13743          0    0.0    0.0     0.0    0.0
+ CAF:main6                         Main                              <no location info>                                     6681          0    0.0    0.0     0.0    0.0
+  main                             Main                              app\Main.hs:(16,1)-(26,24)                            13354          0    0.0    0.0     0.0    0.0
+   main.outtext                    Main                              app\Main.hs:(22,9)-(24,70)                            13355          0    0.0    0.0     0.0    0.0
+ CAF:main7                         Main                              <no location info>                                     6682          0    0.0    0.0     0.0    0.0
+  main                             Main                              app\Main.hs:(16,1)-(26,24)                            13352          0    0.0    0.0     0.0    0.0
+   main.outtext                    Main                              app\Main.hs:(22,9)-(24,70)                            13353          0    0.0    0.0     0.0    0.0
+ CAF:mxor                          Utils                             src\Utils.hs:73:1-4                                    6773          0    0.0    0.0     0.0    0.0
+  mxor                             Utils                             src\Utils.hs:73:1-26                                  13373          1    0.0    0.0     0.0    0.0
+ CAF:nb                            Rjindael                          src\Rjindael.hs:23:1-2                                 6739          0    0.0    0.0     0.0    0.0
+  nb                               Rjindael                          src\Rjindael.hs:23:1-13                               13388          1    0.0    0.0     0.0    0.0
+ CAF:nk_128                        Rjindael                          src\Rjindael.hs:24:1-6                                 6740          0    0.0    0.0     0.0    0.0
+  nk_128                           Rjindael                          src\Rjindael.hs:24:1-17                               13380          1    0.0    0.0     0.0    0.0
+ CAF:nr_128                        Rjindael                          src\Rjindael.hs:27:1-6                                 6743          0    0.0    0.0     0.0    0.0
+  nr_128                           Rjindael                          src\Rjindael.hs:27:1-18                               13377          1    0.0    0.0     0.0    0.0
+ CAF:rcon2                         Utils                             <no location info>                                     6827          0    0.0    0.0     0.0    0.0
+  rcon                             Utils                             src\Utils.hs:70:1-27                                  13470          0    0.0    0.0     0.0    0.0
+   basicLength                     Data.Vector.Storable              Data\Vector\Storable.hs:214:3-30                      13508          1    0.0    0.0     0.0    0.0
+   unId                            Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13471          1    0.0    0.0     0.0    0.0
+ CAF:rcon_vector                   BakeVector                        src\BakeVector.hs:29:1-11                              6867          0    0.0    0.0     0.0    0.0
+  rcon_vector                      BakeVector                        src\BakeVector.hs:(29,1)-(60,61)                      13472          1    0.0    0.0     0.0    0.0
+   basicLength                     Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:104:3-31              13484        265    0.0    0.0     0.0    0.0
+   >>=                             Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:33:3-18                    13482        257    0.0    0.0     0.0    0.0
+    fmap                           Data.Vector.Fusion.Stream.Monadic Data\Vector\Fusion\Stream\Monadic.hs:(125,3)-(127,20) 13483        257    0.0    0.0     0.0    0.0
+     basicUnsafeWrite              Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:(138,3)-(140,49)      13501        256    0.0    0.0     0.0    0.0
+      basicUnsafeWrite.\           Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:140:33-49             13505        256    0.0    0.0     0.0    0.0
+      internal                     Control.Monad.Primitive           Control\Monad\Primitive.hs:85:3-21                    13504        256    0.0    0.0     0.0    0.0
+   basicUnsafeSlice                Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:107:3-78              13502        257    0.0    0.0     0.0    0.0
+   unId                            Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13481        257    0.0    0.0     0.0    0.0
+   basicUnsafeGrow                 Data.Vector.Generic.Mutable.Base  Data\Vector\Generic\Mutable\Base.hs:(138,3)-(144,23)  13487          9    0.0    0.0     0.0    0.0
+    basicUnsafeCopy                Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:(146,3)-(150,21)      13496          9    0.0    0.0     0.0    0.0
+     basicUnsafeCopy.\             Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:(149,7)-(150,21)      13499          9    0.0    0.0     0.0    0.0
+      basicUnsafeCopy.\.\          Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:150:7-21              13500          9    0.0    0.0     0.0    0.0
+     internal                      Control.Monad.Primitive           Control\Monad\Primitive.hs:85:3-21                    13498          9    0.0    0.0     0.0    0.0
+     primitive                     Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13497          9    0.0    0.0     0.0    0.0
+    basicUnsafeGrow.n              Data.Vector.Generic.Mutable.Base  Data\Vector\Generic\Mutable\Base.hs:144:7-23          13488          9    0.0    0.0     0.0    0.0
+     basicLength                   Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:104:3-31              13489          9    0.0    0.0     0.0    0.0
+    basicUnsafeNew                 Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:(119,3)-(127,38)      13490          9    0.0    0.0     0.0    0.0
+     basicUnsafeNew.mx             Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:127:7-38              13491          9    0.0    0.0     0.0    0.0
+     basicUnsafeNew.size           Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:126:7-36              13492          9    0.0    0.0     0.0    0.0
+     internal                      Control.Monad.Primitive           Control\Monad\Primitive.hs:85:3-21                    13494          9    0.0    0.0     0.0    0.0
+     primitive                     Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13493          9    0.0    0.0     0.0    0.0
+    basicUnsafeSlice               Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:107:3-78              13495          9    0.0    0.0     0.0    0.0
+   enlarge_delta                   Data.Vector.Generic.Mutable       Data\Vector\Generic\Mutable.hs:635:1-34               13485          9    0.0    0.0     0.0    0.0
+    basicLength                    Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:104:3-31              13486          9    0.0    0.0     0.0    0.0
+   basicUnsafeFreeze               Data.Vector.Storable              Data\Vector\Storable.hs:208:3-57                      13507          1    0.0    0.0     0.0    0.0
+   basicUnsafeNew                  Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:(119,3)-(127,38)      13475          1    0.0    0.0     0.0    0.0
+    basicUnsafeNew.mx              Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:127:7-38              13476          1    0.0    0.0     0.0    0.0
+    basicUnsafeNew.size            Data.Vector.Storable.Mutable      Data\Vector\Storable\Mutable.hs:126:7-36              13477          1    0.0    0.0     0.0    0.0
+    primitive                      Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13478          1    0.0    0.0     0.0    0.0
+   internal                        Control.Monad.Primitive           Control\Monad\Primitive.hs:85:3-21                    13479          1    0.0    0.0     0.0    0.0
+   sChunks                         Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:114:30-36        13480          1    0.0    0.0     0.0    0.0
+   sSize                           Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:116:30-34        13474          1    0.0    0.0     0.0    0.0
+   upperBound                      Data.Vector.Fusion.Bundle.Size    Data\Vector\Fusion\Bundle\Size.hs:(118,1)-(120,30)    13473          1    0.0    0.0     0.0    0.0
+ CAF:subByte                       Utils                             src\Utils.hs:82:1-7                                    6821          0    0.0    0.0     0.0    0.0
+  subByte                          Utils                             src\Utils.hs:82:1-45                                  13466          1    0.0    0.0     0.0    0.0
+ CAF:subByteFile                   Utils                             src\Utils.hs:85:1-11                                   6820          0    0.0    0.0     0.0    0.0
+  subByteFile                      Utils                             src\Utils.hs:85:1-40                                  13468          1    0.0    0.0     0.0    0.0
+ CAF:subBytes                      Utils                             src\Utils.hs:79:1-8                                    6823          0    0.0    0.0     0.0    0.0
+  subBytes                         Utils                             src\Utils.hs:79:1-23                                  13513          1    0.0    0.0     0.0    0.0
+ CAF:subWord                       Utils                             src\Utils.hs:135:1-7                                   6822          0    0.0    0.0     0.0    0.0
+  subWord                          Utils                             src\Utils.hs:135:1-21                                 13396          1    0.0    0.0     0.0    0.0
+ CAF:tiv                           Tests                             src\Tests.hs:55:1-3                                    6730          0    0.0    0.0     0.0    0.0
+  tiv                              Tests                             src\Tests.hs:55:1-24                                  13369          1    0.0    0.0     0.0    0.0
+ CAF:tiv1                          Tests                             <no location info>                                     6729          0    0.0    0.0     0.0    0.0
+  tiv                              Tests                             src\Tests.hs:55:1-24                                  13370          0    0.0    0.0     0.0    0.0
+ CAF:tkey                          Tests                             src\Tests.hs:15:1-4                                    6686          0    0.0    0.0     0.0    0.0
+  tkey                             Tests                             src\Tests.hs:(15,1)-(18,28)                           13393          1    0.0    0.0     0.0    0.0
+ main                              Main                              app\Main.hs:(16,1)-(26,24)                            13347          0    0.0    0.0   100.0  100.0
+  main.flag                        Main                              app\Main.hs:18:9-27                                   13350          1    0.0    0.0     0.0    0.0
+  main.fpath                       Main                              app\Main.hs:19:9-27                                   13348          1    0.0    0.0     0.0    0.0
+  main.outpath                     Main                              app\Main.hs:20:9-27                                   13349          1    0.0    0.0     0.0    0.0
+  main.outtext                     Main                              app\Main.hs:(22,9)-(24,70)                            13351          1    0.0    0.0   100.0  100.0
+   cbcEncrypt                      Block                             src\Block.hs:(37,1)-(44,81)                           13356          1    0.0    0.0   100.0  100.0
+    cbcEncrypt.ctext'              Block                             src\Block.hs:44:5-81                                  13357          1    0.0    0.0    99.9   99.9
+     cbcEncrypt.ctext'.\           Block                             src\Block.hs:44:31-70                                 13371      27185    0.1    0.0    99.9   99.9
+      encryptAES                   Rjindael                          src\Rjindael.hs:(50,1)-(61,24)                        13372      27185    0.1    0.1    99.6   99.8
+       cipherRound                 Rjindael                          src\Rjindael.hs:(77,1)-(78,59)                        13519     244665    0.9    0.3    90.6   91.4
+        mixColumns                 Utils                             src\Utils.hs:(119,1)-(120,46)                         13576     244665    8.1    7.7    50.4   50.6
+         >>=                       Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:33:3-18                    13609    4159305    0.4    0.5     3.2    2.8
+          fmap                     Data.Vector.Fusion.Stream.Monadic Data\Vector\Fusion\Stream\Monadic.hs:(125,3)-(127,20) 13610    4159305    1.6    1.4     2.8    2.2
+           basicUnsafeWrite        Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13611    3914640    1.0    0.9     1.2    0.9
+            primitive              Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13613          0    0.2    0.0     0.2    0.0
+         basicUnsafeSlice          Data.Vector.Mutable               Data\Vector\Mutable.hs:88:3-62                        13612    4159305    0.6    0.7     0.6    0.7
+         unId                      Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13608    4159305    0.0    0.0     0.0    0.0
+         mixColumn                 Utils                             src\Utils.hs:(111,1)-(116,52)                         13590     978660    0.3    0.0    25.4   24.2
+          mixColumn.s0'            Utils                             src\Utils.hs:113:5-52                                 13616     978660    0.3    0.0     5.7    6.1
+           .+.                     GaloisFields                      src\GaloisFields.hs:59:1-22                           13731    2935980    0.2    0.1     0.4    0.2
+            addGF2                 GaloisFields                      src\GaloisFields.hs:51:3-24                           13732    2935980    0.2    0.1     0.2    0.1
+           .*.                     GaloisFields                      src\GaloisFields.hs:56:1-35                           13617    1957320    0.3    0.2     5.0    5.9
+            multGF2Word8           GaloisFields                      src\GaloisFields.hs:67:1-93                           13619    1957320    1.0    1.0     4.7    5.7
+             multGF2Int            GaloisFields                      src\GaloisFields.hs:64:1-61                           13622    1957320    1.9    1.2     3.6    4.7
+              multGF2'             GaloisFields                      src\GaloisFields.hs:(101,1)-(103,57)                  13623    5871960    0.9    2.6     0.9    2.6
+              addGF2               GaloisFields                      src\GaloisFields.hs:47:3-24                           13624    3914640    0.3    0.3     0.3    0.3
+              pmod                 GaloisFields                      src\GaloisFields.hs:(109,1)-(114,34)                  13728    2936156    0.6    0.6     0.6    0.6
+               pmod.leadingA       GaloisFields                      src\GaloisFields.hs:114:5-34                          13730    2936156    0.0    0.0     0.0    0.0
+               pmod.leadingM       GaloisFields                      src\GaloisFields.hs:113:5-34                          13729    2936156    0.0    0.0     0.0    0.0
+          mixColumn.s1'            Utils                             src\Utils.hs:114:5-52                                 13659     978660    0.4    0.0     6.4    6.1
+           .+.                     GaloisFields                      src\GaloisFields.hs:59:1-22                           13736    2935980    0.4    0.1     0.6    0.2
+            addGF2                 GaloisFields                      src\GaloisFields.hs:51:3-24                           13737    2935980    0.3    0.1     0.3    0.1
+           .*.                     GaloisFields                      src\GaloisFields.hs:56:1-35                           13660    1957320    0.4    0.2     5.3    5.9
+            multGF2Word8           GaloisFields                      src\GaloisFields.hs:67:1-93                           13661    1957320    1.0    1.0     5.0    5.7
+             multGF2Int            GaloisFields                      src\GaloisFields.hs:64:1-61                           13662    1957320    1.9    1.2     4.0    4.7
+              multGF2'             GaloisFields                      src\GaloisFields.hs:(101,1)-(103,57)                  13663    5871960    0.9    2.6     0.9    2.6
+              addGF2               GaloisFields                      src\GaloisFields.hs:47:3-24                           13664    3914640    0.2    0.3     0.2    0.3
+              pmod                 GaloisFields                      src\GaloisFields.hs:(109,1)-(114,34)                  13733    2935883    0.9    0.6     0.9    0.6
+               pmod.leadingA       GaloisFields                      src\GaloisFields.hs:114:5-34                          13735    2935883    0.0    0.0     0.0    0.0
+               pmod.leadingM       GaloisFields                      src\GaloisFields.hs:113:5-34                          13734    2935883    0.0    0.0     0.0    0.0
+          mixColumn.s2'            Utils                             src\Utils.hs:115:5-52                                 13665     978660    0.6    0.0     5.7    6.1
+           .+.                     GaloisFields                      src\GaloisFields.hs:59:1-22                           13741    2935980    0.4    0.2     0.7    0.3
+            addGF2                 GaloisFields                      src\GaloisFields.hs:51:3-24                           13742    2935980    0.3    0.1     0.3    0.1
+           .*.                     GaloisFields                      src\GaloisFields.hs:56:1-35                           13666    1957320    0.5    0.2     4.5    5.9
+            multGF2Word8           GaloisFields                      src\GaloisFields.hs:67:1-93                           13667    1957320    0.8    1.0     4.0    5.7
+             multGF2Int            GaloisFields                      src\GaloisFields.hs:64:1-61                           13668    1957320    1.3    1.2     3.1    4.7
+              multGF2'             GaloisFields                      src\GaloisFields.hs:(101,1)-(103,57)                  13669    5871960    0.9    2.6     0.9    2.6
+              addGF2               GaloisFields                      src\GaloisFields.hs:47:3-24                           13670    3914640    0.3    0.3     0.3    0.3
+              pmod                 GaloisFields                      src\GaloisFields.hs:(109,1)-(114,34)                  13738    2935425    0.5    0.6     0.5    0.6
+               pmod.leadingA       GaloisFields                      src\GaloisFields.hs:114:5-34                          13740    2935425    0.0    0.0     0.0    0.0
+               pmod.leadingM       GaloisFields                      src\GaloisFields.hs:113:5-34                          13739    2935425    0.0    0.0     0.0    0.0
+          mixColumn.s3'            Utils                             src\Utils.hs:116:5-52                                 13671     978660    0.4    0.0     7.3    6.0
+           .+.                     GaloisFields                      src\GaloisFields.hs:59:1-22                           13726    2935980    0.4    0.1     0.4    0.1
+            addGF2                 GaloisFields                      src\GaloisFields.hs:51:3-24                           13727    2935980    0.0    0.0     0.0    0.0
+           .*.                     GaloisFields                      src\GaloisFields.hs:56:1-35                           13672    1957320    0.4    0.2     6.4    5.9
+            multGF2Word8           GaloisFields                      src\GaloisFields.hs:67:1-93                           13673    1957320    1.2    1.0     6.0    5.7
+             multGF2Int            GaloisFields                      src\GaloisFields.hs:64:1-61                           13674    1957320    1.9    1.2     4.8    4.7
+              multGF2'             GaloisFields                      src\GaloisFields.hs:(101,1)-(103,57)                  13675    5871960    1.5    2.6     1.5    2.6
+              addGF2               GaloisFields                      src\GaloisFields.hs:47:3-24                           13676    3914640    0.4    0.3     0.4    0.3
+              pmod                 GaloisFields                      src\GaloisFields.hs:(109,1)-(114,34)                  13723    2935698    0.9    0.6     0.9    0.6
+               pmod.leadingA       GaloisFields                      src\GaloisFields.hs:114:5-34                          13725    2935698    0.0    0.0     0.0    0.0
+               pmod.leadingM       GaloisFields                      src\GaloisFields.hs:113:5-34                          13724    2935698    0.0    0.0     0.0    0.0
+         transpose                 Data.Matrix                       Data\Matrix.hs:535:1-62                               13584     489330    3.0    5.2     9.1   10.3
+          basicUnsafeWrite         Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13595    7829280    0.8    0.0     0.8    0.0
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13596    7829280    0.0    0.0     0.0    0.0
+          transpose.\              Data.Matrix                       Data\Matrix.hs:535:54-62                              13599    7829280    0.8    0.7     4.1    4.1
+           safeGet                 Data.Matrix                       Data\Matrix.hs:(454,1)-(456,37)                       13600    7829280    1.5    3.4     3.4    3.4
+            basicUnsafeIndexM      Data.Vector                       Data\Vector.hs:253:3-62                               13602    7829280    1.9    0.0     1.9    0.0
+            unId                   Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13601    7829280    0.0    0.0     0.0    0.0
+          basicInitialize          Data.Vector.Mutable               Data\Vector\Mutable.hs:105:3-31                       13594     489330    0.0    0.0     0.0    0.0
+          basicUnsafeFreeze        Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13597     489330    0.4    0.3     0.5    0.3
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13598     489330    0.1    0.0     0.1    0.0
+          basicUnsafeNew           Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13592     489330    0.6    0.7     0.7    0.7
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13593     489330    0.1    0.0     0.1    0.0
+          ncols                    Data.Matrix                       Data\Matrix.hs:112:4-8                                13585     489330    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data\Matrix.hs:111:4-8                                13586     489330    0.0    0.0     0.0    0.0
+         basicUnsafeFreeze         Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13614     244665    0.2    0.2     0.2    0.2
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13615     244665    0.0    0.0     0.0    0.0
+         basicUnsafeNew            Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13605     244665    0.4    0.4     0.4    0.4
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13606     244665    0.0    0.0     0.0    0.0
+         sChunks                   Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:114:30-36        13607     244665    0.0    0.0     0.0    0.0
+         sSize                     Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:116:30-34        13604     244665    0.0    0.0     0.0    0.0
+         toLists                   Data.Matrix                       Data\Matrix.hs:336:1-79                               13587     244665    2.5    4.3     3.4    4.3
+          basicUnsafeIndexM        Data.Vector                       Data\Vector.hs:253:3-62                               13626    3914640    0.8    0.0     0.8    0.0
+          unId                     Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13625    3914640    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data\Matrix.hs:112:4-8                                13591     244665    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data\Matrix.hs:111:4-8                                13588     244665    0.0    0.0     0.0    0.0
+         upperBound                Data.Vector.Fusion.Bundle.Size    Data\Vector\Fusion\Bundle\Size.hs:(118,1)-(120,30)    13603     244665    0.0    0.0     0.0    0.0
+        shiftRows                  Utils                             src\Utils.hs:105:1-71                                 13577     244665    5.6    6.1    15.5   18.0
+         >>=                       Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:33:3-18                    13633    4159305    0.9    0.5     3.4    2.8
+          fmap                     Data.Vector.Fusion.Stream.Monadic Data\Vector\Fusion\Stream\Monadic.hs:(125,3)-(127,20) 13634    4159305    1.6    1.4     2.5    2.2
+           basicUnsafeWrite        Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13635    3914640    0.9    0.9     0.9    0.9
+         basicUnsafeSlice          Data.Vector.Mutable               Data\Vector\Mutable.hs:88:3-62                        13636    4159305    0.4    0.7     0.4    0.7
+         unId                      Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13632    4159305    0.0    0.0     0.0    0.0
+         rotateList                Utils                             src\Utils.hs:(100,1)-(101,54)                         13582     978660    2.5    3.5     2.5    3.5
+         basicUnsafeFreeze         Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13638     244665    0.1    0.2     0.1    0.2
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13639     244665    0.0    0.0     0.0    0.0
+         basicUnsafeNew            Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13629     244665    0.3    0.4     0.3    0.4
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13630     244665    0.0    0.0     0.0    0.0
+         sChunks                   Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:114:30-36        13631     244665    0.0    0.0     0.0    0.0
+         sSize                     Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:116:30-34        13628     244665    0.0    0.0     0.0    0.0
+         toLists                   Data.Matrix                       Data\Matrix.hs:336:1-79                               13580     244665    2.2    4.3     3.2    4.3
+          basicUnsafeIndexM        Data.Vector                       Data\Vector.hs:253:3-62                               13641    3914640    1.0    0.0     1.0    0.0
+          unId                     Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13640    3914640    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data\Matrix.hs:112:4-8                                13583     244665    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data\Matrix.hs:111:4-8                                13581     244665    0.0    0.0     0.0    0.0
+         upperBound                Data.Vector.Fusion.Bundle.Size    Data\Vector\Fusion\Bundle\Size.hs:(118,1)-(120,30)    13627     244665    0.0    0.0     0.0    0.0
+        mxor                       Utils                             src\Utils.hs:73:1-26                                  13520          0    0.1    0.1     9.1   10.7
+         elementwise               Data.Matrix                       Data\Matrix.hs:(777,1)-(778,26)                       13521     244665    2.3    3.4     9.1   10.6
+          basicUnsafeWrite         Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13568    3914640    0.3    0.0     0.4    0.0
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13569    3914640    0.2    0.0     0.2    0.0
+          elementwise.\            Data.Matrix                       Data\Matrix.hs:778:9-26                               13572    3914640    2.0    3.2     5.4    6.7
+           safeGet                 Data.Matrix                       Data\Matrix.hs:(454,1)-(456,37)                       13573    7829280    1.3    3.4     3.4    3.4
+            basicUnsafeIndexM      Data.Vector                       Data\Vector.hs:253:3-62                               13575    7829280    2.1    0.0     2.1    0.0
+            unId                   Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13574    7829280    0.0    0.0     0.0    0.0
+          basicInitialize          Data.Vector.Mutable               Data\Vector\Mutable.hs:105:3-31                       13567     244665    0.0    0.0     0.0    0.0
+          basicUnsafeFreeze        Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13570     244665    0.3    0.2     0.4    0.2
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13571     244665    0.1    0.0     0.1    0.0
+          basicUnsafeNew           Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13565     244665    0.5    0.3     0.6    0.3
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13566     244665    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data\Matrix.hs:112:4-8                                13523     244665    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data\Matrix.hs:111:4-8                                13522     244665    0.0    0.0     0.0    0.0
+        subBytes                   Utils                             src\Utils.hs:79:1-23                                  13578          0    0.1    0.0    14.6   11.8
+         fmap                      Data.Matrix                       Data\Matrix.hs:158:2-53                               13579     244665    3.4    3.3    14.5   11.8
+          >>=                      Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:33:3-18                    13650   12233250    2.8    2.4     9.3    6.9
+           fmap                    Data.Vector.Fusion.Stream.Monadic Data\Vector\Fusion\Stream\Monadic.hs:(125,3)-(127,20) 13651    4159305    1.0    1.4     1.9    2.2
+            basicUnsafeWrite       Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13653    3914640    0.8    0.9     0.9    0.9
+             primitive             Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13655          0    0.2    0.0     0.2    0.0
+           subByte                 Utils                             src\Utils.hs:82:1-45                                  13658          0    4.7    2.2     4.7    2.2
+          basicUnsafeSlice         Data.Vector.Mutable               Data\Vector\Mutable.hs:88:3-62                        13654    4159305    0.6    0.7     0.6    0.7
+          unId                     Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13649    4159305    0.0    0.0     0.0    0.0
+          basicUnsafeIndexM        Data.Vector                       Data\Vector.hs:253:3-62                               13652    3914640    0.4    0.3     0.4    0.3
+          sSize                    Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:116:30-34        13645     489330    0.0    0.0     0.0    0.0
+          basicLength              Data.Vector                       Data\Vector.hs:247:3-32                               13642     244665    0.0    0.0     0.0    0.0
+          basicUnsafeFreeze        Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13656     244665    0.2    0.2     0.2    0.2
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13657     244665    0.0    0.0     0.0    0.0
+          basicUnsafeNew           Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13646     244665    0.6    0.4     0.6    0.4
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13647     244665    0.0    0.0     0.0    0.0
+          sChunks                  Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:114:30-36        13648     244665    0.0    0.0     0.0    0.0
+          sElems                   Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:113:30-35        13643     244665    0.0    0.0     0.0    0.0
+          upperBound               Data.Vector.Fusion.Bundle.Size    Data\Vector\Fusion\Bundle\Size.hs:(118,1)-(120,30)    13644     244665    0.0    0.0     0.0    0.0
+       encryptAES.(...)            Rjindael                          src\Rjindael.hs:(54,5)-(57,45)                        13376      27185    0.0    0.0     0.0    0.0
+       encryptAES.initState        Rjindael                          src\Rjindael.hs:58:5-49                               13677      27185    0.0    0.0     2.5    2.7
+        inputToStateMatrix         Rjindael                          src\Rjindael.hs:42:1-71                               13679      27185    0.5    0.4     1.7    1.5
+         >>=                       Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:33:3-18                    13714     462145    0.0    0.1     0.2    0.3
+          fmap                     Data.Vector.Fusion.Stream.Monadic Data\Vector\Fusion\Stream\Monadic.hs:(125,3)-(127,20) 13715     462145    0.0    0.2     0.2    0.2
+           basicUnsafeWrite        Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13717     434960    0.1    0.1     0.1    0.1
+         basicUnsafeSlice          Data.Vector.Mutable               Data\Vector\Mutable.hs:88:3-62                        13718     462145    0.0    0.1     0.0    0.1
+         unId                      Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13713     462145    0.0    0.0     0.0    0.0
+         basicUnsafeFreeze         Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13720      27185    0.1    0.0     0.1    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13721      27185    0.0    0.0     0.0    0.0
+         basicUnsafeNew            Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13710      27185    0.0    0.0     0.0    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13711      27185    0.0    0.0     0.0    0.0
+         sChunks                   Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:114:30-36        13712      27185    0.0    0.0     0.0    0.0
+         sSize                     Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:116:30-34        13709      27185    0.0    0.0     0.0    0.0
+         transpose                 Data.Matrix                       Data\Matrix.hs:535:1-62                               13680      27185    0.1    0.3     0.8    0.6
+          basicUnsafeWrite         Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13700     434960    0.1    0.0     0.1    0.0
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13701     434960    0.0    0.0     0.0    0.0
+          transpose.\              Data.Matrix                       Data\Matrix.hs:535:54-62                              13704     434960    0.0    0.0     0.4    0.2
+           safeGet                 Data.Matrix                       Data\Matrix.hs:(454,1)-(456,37)                       13705     434960    0.1    0.2     0.4    0.2
+            basicUnsafeIndexM      Data.Vector                       Data\Vector.hs:253:3-62                               13707     434960    0.3    0.0     0.3    0.0
+            unId                   Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13706     434960    0.0    0.0     0.0    0.0
+          basicInitialize          Data.Vector.Mutable               Data\Vector\Mutable.hs:105:3-31                       13699      27185    0.0    0.0     0.0    0.0
+          basicUnsafeFreeze        Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13702      27185    0.0    0.0     0.0    0.0
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13703      27185    0.0    0.0     0.0    0.0
+          basicUnsafeNew           Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13697      27185    0.1    0.0     0.1    0.0
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13698      27185    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data\Matrix.hs:112:4-8                                13681      27185    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data\Matrix.hs:111:4-8                                13682      27185    0.0    0.0     0.0    0.0
+         upperBound                Data.Vector.Fusion.Bundle.Size    Data\Vector\Fusion\Bundle\Size.hs:(118,1)-(120,30)    13708      27185    0.0    0.0     0.0    0.0
+        mxor                       Utils                             src\Utils.hs:73:1-26                                  13678          0    0.0    0.0     0.9    1.2
+         elementwise               Data.Matrix                       Data\Matrix.hs:(777,1)-(778,26)                       13683      27185    0.2    0.4     0.9    1.2
+          basicUnsafeWrite         Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13689     434960    0.0    0.0     0.0    0.0
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13690     434960    0.0    0.0     0.0    0.0
+          elementwise.\            Data.Matrix                       Data\Matrix.hs:778:9-26                               13693     434960    0.3    0.4     0.6    0.7
+           safeGet                 Data.Matrix                       Data\Matrix.hs:(454,1)-(456,37)                       13694     869920    0.2    0.4     0.3    0.4
+            basicUnsafeIndexM      Data.Vector                       Data\Vector.hs:253:3-62                               13696     869920    0.1    0.0     0.1    0.0
+            unId                   Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13695     869920    0.0    0.0     0.0    0.0
+          basicInitialize          Data.Vector.Mutable               Data\Vector\Mutable.hs:105:3-31                       13688      27185    0.0    0.0     0.0    0.0
+          basicUnsafeFreeze        Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13691      27185    0.1    0.0     0.1    0.0
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13692      27185    0.0    0.0     0.0    0.0
+          basicUnsafeNew           Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13686      27185    0.1    0.0     0.1    0.0
+           primitive               Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13687      27185    0.0    0.0     0.0    0.0
+          ncols                    Data.Matrix                       Data\Matrix.hs:112:4-8                                13685      27185    0.0    0.0     0.0    0.0
+          nrows                    Data.Matrix                       Data\Matrix.hs:111:4-8                                13684      27185    0.0    0.0     0.0    0.0
+       encryptAES.nr               Rjindael                          src\Rjindael.hs:(54,5)-(57,45)                        13378      27185    0.0    0.0     0.0    0.0
+       encryptAES.r0               Rjindael                          src\Rjindael.hs:59:5-23                               13722      27185    0.0    0.0     0.0    0.0
+       encryptAES.rf               Rjindael                          src\Rjindael.hs:61:5-24                               13375      27185    0.0    0.0     0.0    0.0
+       encryptAES.rs               Rjindael                          src\Rjindael.hs:60:5-39                               13518      27185    0.0    0.1     0.0    0.1
+       shiftRows                   Utils                             src\Utils.hs:105:1-71                                 13516      27185    1.0    0.7     2.2    2.0
+        >>=                        Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:33:3-18                    13534     462145    0.1    0.1     0.3    0.3
+         fmap                      Data.Vector.Fusion.Stream.Monadic Data\Vector\Fusion\Stream\Monadic.hs:(125,3)-(127,20) 13535     462145    0.0    0.2     0.2    0.2
+          basicUnsafeWrite         Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13536     434960    0.2    0.1     0.2    0.1
+        basicUnsafeSlice           Data.Vector.Mutable               Data\Vector\Mutable.hs:88:3-62                        13537     462145    0.1    0.1     0.1    0.1
+        unId                       Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13533     462145    0.0    0.0     0.0    0.0
+        rotateList                 Utils                             src\Utils.hs:(100,1)-(101,54)                         13526     108740    0.3    0.4     0.3    0.4
+        basicUnsafeFreeze          Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13540      27185    0.0    0.0     0.0    0.0
+         primitive                 Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13541      27185    0.0    0.0     0.0    0.0
+        basicUnsafeNew             Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13530      27185    0.0    0.0     0.0    0.0
+         primitive                 Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13531      27185    0.0    0.0     0.0    0.0
+        sChunks                    Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:114:30-36        13532      27185    0.0    0.0     0.0    0.0
+        sSize                      Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:116:30-34        13529      27185    0.0    0.0     0.0    0.0
+        toLists                    Data.Matrix                       Data\Matrix.hs:336:1-79                               13524      27185    0.3    0.5     0.4    0.5
+         basicUnsafeIndexM         Data.Vector                       Data\Vector.hs:253:3-62                               13564     434960    0.1    0.0     0.1    0.0
+         unId                      Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13563     434960    0.0    0.0     0.0    0.0
+         ncols                     Data.Matrix                       Data\Matrix.hs:112:4-8                                13527      27185    0.0    0.0     0.0    0.0
+         nrows                     Data.Matrix                       Data\Matrix.hs:111:4-8                                13525      27185    0.0    0.0     0.0    0.0
+        upperBound                 Data.Vector.Fusion.Bundle.Size    Data\Vector\Fusion\Bundle\Size.hs:(118,1)-(120,30)    13528      27185    0.0    0.0     0.0    0.0
+       stateMatrixToOutput         Rjindael                          src\Rjindael.hs:(45,1)-(46,45)                        13406      27185    0.1    0.0     1.1    1.0
+        toList                     Data.Matrix                       Data\Matrix.hs:326:1-74                               13410      27185    0.2    0.4     0.3    0.4
+         basicUnsafeIndexM         Data.Vector                       Data\Vector.hs:253:3-62                               13415     434960    0.0    0.0     0.0    0.0
+         unId                      Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13414     434960    0.0    0.0     0.0    0.0
+         ncols                     Data.Matrix                       Data\Matrix.hs:112:4-8                                13412      27185    0.0    0.0     0.0    0.0
+         nrows                     Data.Matrix                       Data\Matrix.hs:111:4-8                                13411      27185    0.0    0.0     0.0    0.0
+        transpose                  Data.Matrix                       Data\Matrix.hs:535:1-62                               13407      27185    0.3    0.3     0.6    0.6
+         basicUnsafeWrite          Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13420     434960    0.0    0.0     0.0    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13421     434960    0.0    0.0     0.0    0.0
+         transpose.\               Data.Matrix                       Data\Matrix.hs:535:54-62                              13425     434960    0.1    0.0     0.2    0.2
+          safeGet                  Data.Matrix                       Data\Matrix.hs:(454,1)-(456,37)                       13426     434960    0.0    0.2     0.1    0.2
+           basicUnsafeIndexM       Data.Vector                       Data\Vector.hs:253:3-62                               13428     434960    0.1    0.0     0.1    0.0
+           unId                    Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13427     434960    0.0    0.0     0.0    0.0
+         basicInitialize           Data.Vector.Mutable               Data\Vector\Mutable.hs:105:3-31                       13419      27185    0.0    0.0     0.0    0.0
+         basicUnsafeFreeze         Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13422      27185    0.0    0.0     0.0    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13423      27185    0.0    0.0     0.0    0.0
+         basicUnsafeNew            Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13417      27185    0.0    0.0     0.0    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13418      27185    0.0    0.0     0.0    0.0
+         ncols                     Data.Matrix                       Data\Matrix.hs:112:4-8                                13408      27185    0.0    0.0     0.0    0.0
+         nrows                     Data.Matrix                       Data\Matrix.hs:111:4-8                                13409      27185    0.0    0.0     0.0    0.0
+       mxor                        Utils                             src\Utils.hs:73:1-26                                  13374          0    0.1    0.0     1.3    1.2
+        elementwise                Data.Matrix                       Data\Matrix.hs:(777,1)-(778,26)                       13403      27185    0.3    0.4     1.2    1.2
+         basicUnsafeWrite          Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13432     434960    0.0    0.0     0.2    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13433     434960    0.1    0.0     0.1    0.0
+         elementwise.\             Data.Matrix                       Data\Matrix.hs:778:9-26                               13436     434960    0.4    0.4     0.8    0.7
+          safeGet                  Data.Matrix                       Data\Matrix.hs:(454,1)-(456,37)                       13437     869920    0.2    0.4     0.4    0.4
+           basicUnsafeIndexM       Data.Vector                       Data\Vector.hs:253:3-62                               13439     869920    0.2    0.0     0.2    0.0
+           unId                    Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13438     869920    0.0    0.0     0.0    0.0
+         basicInitialize           Data.Vector.Mutable               Data\Vector\Mutable.hs:105:3-31                       13431      27185    0.0    0.0     0.0    0.0
+         basicUnsafeFreeze         Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13434      27185    0.0    0.0     0.0    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13435      27185    0.0    0.0     0.0    0.0
+         basicUnsafeNew            Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13429      27185    0.0    0.0     0.0    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13430      27185    0.0    0.0     0.0    0.0
+         ncols                     Data.Matrix                       Data\Matrix.hs:112:4-8                                13405      27185    0.0    0.0     0.0    0.0
+         nrows                     Data.Matrix                       Data\Matrix.hs:111:4-8                                13404      27185    0.0    0.0     0.0    0.0
+       subBytes                    Utils                             src\Utils.hs:79:1-23                                  13514          0    0.0    0.0     1.7    1.3
+        fmap                       Data.Matrix                       Data\Matrix.hs:158:2-53                               13515      27185    0.4    0.4     1.7    1.3
+         >>=                       Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:33:3-18                    13550    1359250    0.4    0.3     1.2    0.8
+          fmap                     Data.Vector.Fusion.Stream.Monadic Data\Vector\Fusion\Stream\Monadic.hs:(125,3)-(127,20) 13551     462145    0.1    0.2     0.3    0.2
+           basicUnsafeWrite        Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13554     434960    0.2    0.1     0.2    0.1
+          subByte                  Utils                             src\Utils.hs:82:1-45                                  13562          0    0.5    0.2     0.5    0.2
+         basicUnsafeSlice          Data.Vector.Mutable               Data\Vector\Mutable.hs:88:3-62                        13555     462145    0.0    0.1     0.0    0.1
+         unId                      Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13549     462145    0.0    0.0     0.0    0.0
+         basicUnsafeIndexM         Data.Vector                       Data\Vector.hs:253:3-62                               13552     434960    0.0    0.0     0.0    0.0
+         sSize                     Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:116:30-34        13545      54370    0.0    0.0     0.0    0.0
+         basicLength               Data.Vector                       Data\Vector.hs:247:3-32                               13542      27185    0.0    0.0     0.0    0.0
+         basicUnsafeFreeze         Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13560      27185    0.0    0.0     0.0    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13561      27185    0.0    0.0     0.0    0.0
+         basicUnsafeNew            Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13546      27185    0.0    0.0     0.0    0.0
+          primitive                Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13547      27185    0.0    0.0     0.0    0.0
+         sChunks                   Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:114:30-36        13548      27185    0.0    0.0     0.0    0.0
+         sElems                    Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:113:30-35        13543      27185    0.0    0.0     0.0    0.0
+         upperBound                Data.Vector.Fusion.Bundle.Size    Data\Vector\Fusion\Bundle\Size.hs:(118,1)-(120,30)    13544      27185    0.0    0.0     0.0    0.0
+      xor                          Data.Bits.ByteString              src\Data\Bits\ByteString.hs:27:3-38                   13716      27185    0.2    0.1     0.2    0.1
+    cbcEncrypt.ptext'              Block                             src\Block.hs:43:5-59                                  13358          1    0.0    0.0     0.0    0.0
+     pkcs7                         Utils                             src\Utils.hs:(144,1)-(146,76)                         13367          1    0.0    0.0     0.0    0.0
+      pkcs7.n                      Utils                             src\Utils.hs:146:5-76                                 13368          1    0.0    0.0     0.0    0.0
+     chunksOfBS                    Utils                             src\Utils.hs:164:1-59                                 13362          0    0.0    0.0     0.0    0.0
+      nothingWhen                  Utils                             src\Utils.hs:161:1-34                                 13364          0    0.0    0.0     0.0    0.0
+       justWhen                    Utils                             src\Utils.hs:158:1-52                                 13365      27186    0.0    0.0     0.0    0.0
+    cbcEncrypt.roundKeys           Block                             src\Block.hs:(39,5)-(42,70)                           13379          1    0.0    0.0     0.0    0.0
+     expandKey                     KeyExpansion                      src\KeyExpansion.hs:(15,1)-(17,51)                    13381          1    0.0    0.0     0.0    0.0
+      >>=                          Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:33:3-18                    13458        187    0.0    0.0     0.0    0.0
+       fmap                        Data.Vector.Fusion.Stream.Monadic Data\Vector\Fusion\Stream\Monadic.hs:(125,3)-(127,20) 13459        187    0.0    0.0     0.0    0.0
+        basicUnsafeWrite           Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13460        176    0.0    0.0     0.0    0.0
+      basicUnsafeSlice             Data.Vector.Mutable               Data\Vector\Mutable.hs:88:3-62                        13461        187    0.0    0.0     0.0    0.0
+      unId                         Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13457        187    0.0    0.0     0.0    0.0
+      basicUnsafeFreeze            Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13464         11    0.0    0.0     0.0    0.0
+       primitive                   Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13465         11    0.0    0.0     0.0    0.0
+      basicUnsafeNew               Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13454         11    0.0    0.0     0.0    0.0
+       primitive                   Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13455         11    0.0    0.0     0.0    0.0
+      sChunks                      Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:114:30-36        13456         11    0.0    0.0     0.0    0.0
+      sSize                        Data.Vector.Fusion.Bundle.Monadic Data\Vector\Fusion\Bundle\Monadic.hs:116:30-34        13452         11    0.0    0.0     0.0    0.0
+      transpose                    Data.Matrix                       Data\Matrix.hs:535:1-62                               13400         11    0.0    0.0     0.0    0.0
+       basicUnsafeWrite            Data.Vector.Mutable               Data\Vector\Mutable.hs:117:3-65                       13443        176    0.0    0.0     0.0    0.0
+        primitive                  Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13444        176    0.0    0.0     0.0    0.0
+       transpose.\                 Data.Matrix                       Data\Matrix.hs:535:54-62                              13447        176    0.0    0.0     0.0    0.0
+        safeGet                    Data.Matrix                       Data\Matrix.hs:(454,1)-(456,37)                       13448        176    0.0    0.0     0.0    0.0
+         basicUnsafeIndexM         Data.Vector                       Data\Vector.hs:253:3-62                               13450        176    0.0    0.0     0.0    0.0
+         unId                      Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13449        176    0.0    0.0     0.0    0.0
+       basicInitialize             Data.Vector.Mutable               Data\Vector\Mutable.hs:105:3-31                       13442         11    0.0    0.0     0.0    0.0
+       basicUnsafeFreeze           Data.Vector                       Data\Vector.hs:(239,3)-(240,47)                       13445         11    0.0    0.0     0.0    0.0
+        primitive                  Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13446         11    0.0    0.0     0.0    0.0
+       basicUnsafeNew              Data.Vector.Mutable               Data\Vector\Mutable.hs:(98,3)-(101,32)                13440         11    0.0    0.0     0.0    0.0
+        primitive                  Control.Monad.Primitive           Control\Monad\Primitive.hs:143:3-16                   13441         11    0.0    0.0     0.0    0.0
+       ncols                       Data.Matrix                       Data\Matrix.hs:112:4-8                                13401         11    0.0    0.0     0.0    0.0
+       nrows                       Data.Matrix                       Data\Matrix.hs:111:4-8                                13402         11    0.0    0.0     0.0    0.0
+      upperBound                   Data.Vector.Fusion.Bundle.Size    Data\Vector\Fusion\Bundle\Size.hs:(118,1)-(120,30)    13451         11    0.0    0.0     0.0    0.0
+      chunksOf                     Data.List.Split.Internals         src\Data\List\Split\Internals.hs:(514,1)-(517,49)     13385          1    0.0    0.0     0.0    0.0
+       build                       Data.List.Split.Internals         src\Data\List\Split\Internals.hs:499:1-18             13386          1    0.0    0.0     0.0    0.0
+        chunksOf.splitter          Data.List.Split.Internals         src\Data\List\Split\Internals.hs:(516,3)-(517,49)     13387         11    0.0    0.0     0.0    0.0
+      expandKey.expanded           KeyExpansion                      src\KeyExpansion.hs:17:9-51                           13384          1    0.0    0.0     0.0    0.0
+       expandKey''                 KeyExpansion                      src\KeyExpansion.hs:(23,1)-(33,22)                    13389         40    0.0    0.0     0.0    0.0
+        expandKey''.imod           KeyExpansion                      src\KeyExpansion.hs:25:25-41                          13394         40    0.0    0.0     0.0    0.0
+        expandKey''.temp           KeyExpansion                      src\KeyExpansion.hs:(26,25)-(30,46)                   13395         40    0.0    0.0     0.0    0.0
+         rcon                      Utils                             src\Utils.hs:70:1-27                                  13469         10    0.0    0.0     0.0    0.0
+          basicUnsafeIndexM        Data.Vector.Storable              Data\Vector\Storable.hs:(220,3)-(223,53)              13510         10    0.0    0.0     0.0    0.0
+           basicUnsafeIndexM.\     Data.Vector.Storable              Data\Vector\Storable.hs:223:39-53                     13512         10    0.0    0.0     0.0    0.0
+           internal                Control.Monad.Primitive           Control\Monad\Primitive.hs:85:3-21                    13511         10    0.0    0.0     0.0    0.0
+          unId                     Data.Vector.Fusion.Util           Data\Vector\Fusion\Util.hs:22:21-24                   13509         10    0.0    0.0     0.0    0.0
+         rotWord                   Utils                             src\Utils.hs:138:1-37                                 13398         10    0.0    0.0     0.0    0.0
+         subWord                   Utils                             src\Utils.hs:135:1-21                                 13397          0    0.0    0.0     0.0    0.0
+          subByte                  Utils                             src\Utils.hs:82:1-45                                  13467          0    0.0    0.0     0.0    0.0
+        expandKey''.temp'          KeyExpansion                      src\KeyExpansion.hs:24:25-44                          13399         40    0.0    0.0     0.0    0.0
+        expandKey''.wn             KeyExpansion                      src\KeyExpansion.hs:31:25-57                          13391         40    0.0    0.0     0.0    0.0
+      expandKey.ws                 KeyExpansion                      src\KeyExpansion.hs:16:9-30                           13382          1    0.0    0.0     0.0    0.0
+       expandKey'                  KeyExpansion                      src\KeyExpansion.hs:20:1-67                           13383          1    0.0    0.0     0.0    0.0
+        expandKey'.\               KeyExpansion                      src\KeyExpansion.hs:20:32-56                          13392          4    0.0    0.0     0.0    0.0
